@@ -574,6 +574,8 @@ h2 { font-family: var(--font-display); font-size: clamp(30px,3.8vw,50px); font-w
 .project-icon { font-size:26px; margin-bottom:14px; }
 .project-title { font-family:var(--font-display); font-size:18px; font-weight:700; margin-bottom:7px; }
 .project-desc { font-size:13px; color:var(--text-muted); line-height:1.65; margin-bottom:14px; }
+.project-desc ul { margin:4px 0 0 0; padding-left:16px; }
+.project-desc ul li { margin-bottom:5px; }
 .project-metric { font-family:var(--font-mono); font-size:11px; color:var(--cyan); padding:5px 11px; background:rgba(34,211,238,0.07); border:1px solid rgba(34,211,238,0.18); border-radius:4px; display:inline-block; }
 .project-link { display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--text-dim); text-decoration:none; font-family:var(--font-mono); margin-top:10px; transition:color 0.2s; }
 .project-link:hover { color:var(--amber); }
@@ -1826,7 +1828,12 @@ nav > .nav-links {
       <div class="project-icon">&#x1F947;</div>
       <div class="proj-category">Enterprise AI &middot; Governance &middot; Control Plane</div>
       <div class="project-title">AurumAI</div>
-      <div class="project-desc">Enterprise AI execution control plane - decomposes user intent into deterministic task graphs, routes to SLMs (temp=0) or Claude, enforces YAML-driven policies pre/post execution, generates HMAC-SHA256-signed immutable audit trails, and tracks cost per team. No autonomous agents.</div>
+      <div class="project-desc"><ul>
+        <li>Decomposes user intent into deterministic task graphs</li>
+        <li>Routes to SLMs (temp=0) or Claude via YAML-driven pre/post-execution policies</li>
+        <li>HMAC-SHA256-signed immutable audit trails; cost tracked per team</li>
+        <li>No autonomous agents - deterministic execution only</li>
+      </ul></div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
         <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Task Graphs (DAG)</span>
       </div>
@@ -1840,7 +1847,12 @@ nav > .nav-links {
       <div class="project-icon">&#x26A1;</div>
       <div class="proj-category">Infrastructure &middot; Cost Optimisation &middot; Proxy</div>
       <div class="project-title">OptimaLLM</div>
-      <div class="project-desc">Local reverse proxy (Go 1.26) intercepting Claude Code at :7777 - 13-step optimisation pipeline: SHA256 text dedup, bash-result caching (2h TTL), image stripping + OCR, 4-tier memory manager, BadgerDB knowledge graph with hybrid ranking. Measured 67% token reduction on a 635-request session (295K - 98K tokens).</div>
+      <div class="project-desc"><ul>
+        <li>Local reverse proxy (Go 1.26) intercepting Claude Code at :7777</li>
+        <li>13-step pipeline: SHA256 dedup, bash-result caching (2h TTL), image stripping + OCR</li>
+        <li>4-tier memory manager + BadgerDB knowledge graph with hybrid ranking</li>
+        <li>Measured 67% token reduction on 635-request session (295K -> 98K tokens)</li>
+      </ul></div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
         <span class="tag">Go 1.26</span><span class="tag">BadgerDB v4</span><span class="tag">Ristretto</span><span class="tag">13-step pipeline</span>
       </div>
@@ -1854,7 +1866,12 @@ nav > .nav-links {
       <div class="project-icon">&#x1F9E0;</div>
       <div class="proj-category">ML Platform &middot; Edge AI &middot; Fine-Tuning</div>
       <div class="project-title">SLM Forge</div>
-      <div class="project-desc">Local fine-tuning workbench (Python, 135M-7B). Hardware-tier classification probes actual RAM/VRAM and refuses jobs that won't fit - no silent OOM. MLX-LM primary on Apple Silicon, CUDA via accelerate launch, CPU fallback. 27 curated RAM-tagged models, 6 export formats, 101 unit tests.</div>
+      <div class="project-desc"><ul>
+        <li>Local fine-tuning workbench for 135M-7B models (Python)</li>
+        <li>Hardware-tier classification probes actual RAM/VRAM - refuses jobs that won't fit, no silent OOM</li>
+        <li>MLX-LM primary on Apple Silicon, CUDA via accelerate launch, CPU fallback</li>
+        <li>27 RAM-tagged models, 6 export formats (GGUF/MLX/CoreML/ONNX/TFLite/Ollama), 101 unit tests</li>
+      </ul></div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
         <span class="tag">Python</span><span class="tag">MLX-LM</span><span class="tag">PyTorch/TRL</span><span class="tag">LoRA/QLoRA/DoRA</span><span class="tag">Gradio</span>
       </div>
@@ -1868,7 +1885,12 @@ nav > .nav-links {
       <div class="project-icon">&#x1F4C8;</div>
       <div class="proj-category">Fintech &middot; Bloomberg-grade Terminal &middot; AI Analytics</div>
       <div class="project-title">QuantTradeAI</div>
-      <div class="project-desc">Production Bloomberg alternative (282 features, 30 tabs) - real-time charting (35+ indicators in Web Worker), multi-LLM streaming (Claude 3.5/Gemini 2.0/GPT-4), 3,000 Monte Carlo portfolio optimizer, institutional data (13-F/Form 4/Congress trades/dark pool), 5-guard self-learning trading bot, SHA-256 hash-linked audit chain. 310/310 tests, 0 TS errors, deployed on Vercel/Render/Supabase.</div>
+      <div class="project-desc"><ul>
+        <li>Production Bloomberg alternative - 282 features across 30 tabs</li>
+        <li>Real-time charting (35+ indicators in Web Worker), multi-LLM streaming (Claude 3.5/Gemini 2.0/GPT-4)</li>
+        <li>3,000-path Monte Carlo optimizer; institutional data (13-F/Form 4/Congress trades/dark pool)</li>
+        <li>5-guard self-learning trading bot + SHA-256 hash-linked audit chain; 310/310 tests, 0 TS errors</li>
+      </ul></div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
         <span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Multi-LLM</span><span class="tag">Robinhood API</span>
       </div>
@@ -1882,7 +1904,12 @@ nav > .nav-links {
       <div class="project-icon">&#x1F6A8;</div>
       <div class="proj-category">Computer Vision &middot; Safety Monitoring &middot; Manufacturing</div>
       <div class="project-title">SafetyEye</div>
-      <div class="project-desc">Enterprise CV safety platform - YOLOv8m TensorRT FP16 + ByteTrack at 15 fps per camera (1,500 fps cluster on 3-4 RTX 4090s) - rolling 60-sec FFmpeg segment buffer for stream-copy clip extraction (<500ms) - Ed25519 chain-of-custody signing - OSHA Form 300/300A auto-export, DART/TRIR, ITA e-submission. 30+ API routers, 20+ dashboard pages.</div>
+      <div class="project-desc"><ul>
+        <li>YOLOv8m TensorRT FP16 + ByteTrack at 15 fps/camera (1,500 fps cluster on 3-4 RTX 4090s)</li>
+        <li>Rolling 60-sec FFmpeg segment buffer for stream-copy clip extraction (&lt;500ms)</li>
+        <li>Ed25519 chain-of-custody signing for tamper-proof evidence</li>
+        <li>OSHA Form 300/300A auto-export, DART/TRIR, ITA e-submission; 30+ API routers</li>
+      </ul></div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
         <span class="tag">Python</span><span class="tag">YOLOv8m TensorRT FP16</span><span class="tag">ByteTrack</span><span class="tag">TimescaleDB/PostGIS</span><span class="tag">Claude Vision</span>
       </div>
@@ -1896,7 +1923,12 @@ nav > .nav-links {
       <div class="project-icon">&#x1F5FA;</div>
       <div class="proj-category">Situational Awareness &middot; AI Intelligence Platform</div>
       <div class="project-title">SitAware</div>
-      <div class="project-desc">Global situational-awareness map aggregating 25 open data sources (USGS, GDACS, NASA FIRMS, ACLED, aviation, maritime, weather, ocean) into unified PostGIS incidents. Two-stage Claude pipeline (Haiku extraction then Sonnet narrative) with atomic Redis token budgeting (490K/day, 45 summaries/day, 5/session) and layered degradation.</div>
+      <div class="project-desc"><ul>
+        <li>25 open data sources (USGS, GDACS, NASA FIRMS, ACLED, aviation, maritime, weather, ocean) into unified PostGIS incidents</li>
+        <li>Two-stage Claude pipeline - Haiku extraction then Sonnet narrative generation</li>
+        <li>Atomic Redis token budgeting (490K/day, 45 summaries/day, 5/session) with layered degradation</li>
+        <li>Geohash cache reuse; LibreTranslate for multilingual incident normalization</li>
+      </ul></div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
         <span class="tag">Python</span><span class="tag">PostGIS/MapLibre GL</span><span class="tag">APScheduler</span><span class="tag">LibreTranslate</span><span class="tag">Claude Haiku + Sonnet</span>
       </div>
@@ -1910,7 +1942,12 @@ nav > .nav-links {
       <div class="project-icon">&#x1F47E;</div>
       <div class="proj-category">Systems Research &middot; AI-Native OS &middot; Rust</div>
       <div class="project-title">AetherOS</div>
-      <div class="project-desc">Rust AI-native microkernel OS research prototype. 5 workspace crates (~5K LoC): no_std microkernel (SPSC ring bus), Neural HAL (NPU/GPU runtime via JitPatchContext), USDF vector-addressed storage with VFS bridge, Ring-0 agent swarm (Synthesis/Orchestrator/Curator/MemoryOptimizer/Janitor), SWIM-style gossip cluster with RDMA compute credits. Not a bootable OS - 28 issues documented.</div>
+      <div class="project-desc"><ul>
+        <li>5 workspace crates (~5K LoC): no_std microkernel with SPSC ring bus</li>
+        <li>Neural HAL (NPU/GPU runtime via JitPatchContext); USDF vector-addressed storage with VFS bridge</li>
+        <li>Ring-0 agent swarm (Synthesis/Orchestrator/Curator/MemoryOptimizer/Janitor)</li>
+        <li>SWIM-style gossip cluster with RDMA compute credits; not bootable - 28 issues documented</li>
+      </ul></div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
         <span class="tag">Rust</span><span class="tag">no_std</span><span class="tag">Tokio</span><span class="tag">crossbeam</span><span class="tag">SPSC ring bus</span><span class="tag">SWIM gossip</span>
       </div>
@@ -1924,7 +1961,12 @@ nav > .nav-links {
       <div class="project-icon">&#x1F69A;</div>
       <div class="proj-category">Supply Chain &middot; Analytics Platform &middot; PACCAR-style</div>
       <div class="project-title">Supply Chain Intel</div>
-      <div class="project-desc">PACCAR supply chain intelligence platform - 8 configured connectors (SAP OData v4 OAuth2 + Ariba + CDK + Manhattan + Snowflake + TMS + Warranty + Demand), 13 SQLAlchemy tables, APScheduler (15min ingest/6am daily/Monday weekly). Z-score anomaly detection (60d lookback, z>=2 warning/z>=3 critical). 14-day demand forecast (40% trend + 60% MA). Deployed on Render.</div>
+      <div class="project-desc"><ul>
+        <li>8 connectors: SAP OData v4 OAuth2, Ariba, CDK, Manhattan, Snowflake, TMS, Warranty, Demand</li>
+        <li>13 SQLAlchemy tables; APScheduler for 15-min ingest, 6am daily, Monday weekly jobs</li>
+        <li>Z-score anomaly detection (60d lookback, z&gt;=2 warning / z&gt;=3 critical)</li>
+        <li>14-day demand forecast (40% trend + 60% MA); deployed on Render</li>
+      </ul></div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
         <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">SQLAlchemy</span><span class="tag">SQLAlchemy 2.0</span><span class="tag">APScheduler</span><span class="tag">SAP OData v4 OAuth2</span><span class="tag">scikit-learn</span>
       </div>
