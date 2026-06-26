@@ -1976,6 +1976,25 @@ nav > .nav-links {
       <div class="proj-cta">View Case Study &#x2192;</div>
     </div>
 
+    <!-- 9. SovereignGrid -->
+    <div class="project-card reveal" data-cat="systems" onclick="openCase('sovereigngrid')">
+      <div class="project-icon">&#x26A1;</div>
+      <div class="proj-category">Distributed Systems &middot; Federated AI Compute &middot; Web3 Auth</div>
+      <div class="project-title">SovereignGrid</div>
+      <div class="project-desc"><ul>
+        <li>Decentralized P2P AI compute grid - developers pool local GPU hardware (Ollama/vLLM) into a unified async API gateway</li>
+        <li>EIP-191 Ethereum wallet auth - guild admission verified on every WebSocket connect via admin-signed credentials</li>
+        <li>Smart dispatch matches consumer requests to least-loaded node; 3-layer failure handling with APScheduler requeue sweep</li>
+        <li>Compute credits settled hourly via PL/pgSQL batch - one transaction per hour instead of a write-lock per inference</li>
+      </ul></div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">WebSocket</span><span class="tag">PostgreSQL</span><span class="tag">APScheduler</span><span class="tag">Ethereum EIP-191</span><span class="tag">Ollama</span><span class="tag">vLLM</span>
+      </div>
+      <div class="project-metric">Federated GPU pool - EIP-191 wallet auth - hourly PL/pgSQL settlement - 3-layer fault tolerance</div>
+      <a href="https://github.com/rs1990/SovereignGrid" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/SovereignGrid</a>
+      <div class="proj-cta">View Case Study &#x2192;</div>
+    </div>
+
   </div><!-- end projects-grid -->
 
   <!-- ARCHITECTURE CAROUSEL -->
@@ -2054,6 +2073,7 @@ nav > .nav-links {
   <div style="margin-top:40px">
     <div class="section-label" style="margin-bottom:20px">GitHub Highlights</div>
     <div class="github-grid">
+      <a href="https://github.com/rs1990/SovereignGrid" target="_blank" class="gh-card"><div class="gh-card-title">&#x26A1; SovereignGrid</div><div class="gh-card-desc">Decentralized P2P AI compute grid - EIP-191 wallet auth, federated GPU pool, hourly PL/pgSQL settlement</div><span class="gh-lang">Python</span></a>
       <a href="https://github.com/rs1990/aetheros" target="_blank" class="gh-card"><div class="gh-card-title">&#x1F47E; aetheros</div><div class="gh-card-desc">AI-native microkernel OS - 5 Rust crates, Neural HAL, USDF, cluster-scale NPU compute</div><span class="gh-lang">Rust</span></a>
       <a href="https://github.com/rs1990/supply-chain-intel" target="_blank" class="gh-card"><div class="gh-card-title">&#x1F69A; supply-chain-intel</div><div class="gh-card-desc">PACCAR-style supply chain platform - SAP OData v4, daily/weekly KPIs, anomaly detection</div><span class="gh-lang">Python</span></a>
       <a href="https://github.com/rs1990/QuadSYSspline" target="_blank" class="gh-card"><div class="gh-card-title">&#x1F9E0; QuadSYSspline</div><div class="gh-card-desc">Neural Network Backstepping controller for quadcopters</div><span class="gh-lang">C++</span></a>
@@ -3942,6 +3962,51 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
       {label:'Current Status', content:`<p>An active systems research project exploring novel OS design principles in Rust. The architecture, trait contracts, and IPC bus design are sound and well-documented. 28 improvement items have been identified across severity levels and are being systematically addressed - two build issues on stable Rust are trivial and already documented with fixes. The path from the current codebase to a runnable simulation is clear. This is intentional research work - the value is in the architecture and design decisions, not in producing a shipping OS. Reach out to discuss the research direction or collaborate.</p>`}
     ],
     tags:['Rust','no_std','Async Runtime','Lock-free IPC Bus','Accelerator HAL','Vector Store','Filesystem Bridge','SWIM Gossip','Distributed Compute','AI Agent Swarm','Research Prototype']
+  },
+
+  sovereigngrid: {
+    eyebrow: 'Distributed Systems - Federated AI Compute - Web3 Auth',
+    title: 'SovereignGrid',
+    tagline: 'Decentralized P2P AI compute grid where developers pool local GPU hardware running open-source models into a single unified async API gateway. Consumer agents submit inference jobs; provider daemons connect their local engines via persistent WebSocket with Ethereum wallet authentication. Smart dispatch, multi-layer fault tolerance, and hourly credit settlement via PostgreSQL batch.',
+    meta: [{label:'Language',val:'Python'},{label:'Stack',val:'FastAPI - WebSocket - PostgreSQL/PL/pgSQL - APScheduler - Ethereum EIP-191'},{label:'Role',val:'Full-stack Architecture and Build'},{label:'Status',val:'Functional MVP - end-to-end pipeline operational'}],
+    metrics: [{num:'3',lbl:'Fault-tolerance layers: WS disconnect requeue, dispatch timeout requeue, APScheduler sweep'},{num:'1hr',lbl:'Settlement batch cadence - one PL/pgSQL transaction per hour replaces per-inference write locks'},{num:'EIP-191',lbl:'Ethereum wallet auth - guild admission re-verified on every WebSocket connect'},{num:'N',lbl:'Federated GPU nodes - any Ollama or vLLM engine can join with a guild-admitted wallet'}],
+    sections: [
+      {label:'What It Does', content:`<p>Providers run a daemon that connects their local Ollama or vLLM engine to the central FastAPI gateway over a persistent WebSocket. On connect, the daemon signs a server-issued nonce with its Ethereum wallet (EIP-191); the gateway recovers the address and verifies it against guild membership records signed by a Guild Administrator. Spoofed rows without a valid admin signature are rejected at the protocol level.</p><p>Consumer agents call standard inference endpoints (compatible with OpenAI chat format). The gateway dispatches to the least-loaded online node serving the requested model. Completed inferences append to an immutable inference ledger priced by a model-size rate table; node balances update once per hour via a single PL/pgSQL batch transaction. Reach out to discuss federation architecture or deployment.</p>`},
+      {label:'Architecture', arch:`<span class="node">Gateway (FastAPI):</span>
+  <span class="leaf">POST /v1/chat/completions - sync inference</span>
+  <span class="leaf">POST /v1/jobs - async job submission with consumer WS callback</span>
+  <span class="leaf">WS /ws/provider - provider connection hub</span>
+  <span class="leaf">Smart dispatch: least-loaded node matching requested model</span>
+  <span class="leaf">Sanitization sandbox: rejects host-execution payload patterns before dispatch</span>
+
+<span class="node">Provider Daemon:</span>
+  <span class="leaf">Binds to local Ollama :11434 or vLLM :8000</span>
+  <span class="leaf">EIP-191 wallet signing on nonce challenge</span>
+  <span class="leaf">Broadcasts active models + max_concurrency on connect</span>
+  <span class="leaf">Reconnect with exponential backoff</span>
+
+<span class="node">Fault Tolerance (3 layers):</span>
+  <span class="leaf">Layer 1: WS disconnect - all in-flight jobs requeued immediately</span>
+  <span class="leaf">Layer 2: Dispatch timeout - requeue to next available node</span>
+  <span class="leaf">Layer 3: APScheduler sweep (15s) - expired leases requeued; dead after max_attempts</span>
+
+<span class="node">Compute Credit Settlement:</span>
+  <span class="leaf">inference_ledger: append-only row per completed job</span>
+  <span class="leaf">model_rates: size-based pricing (70B ~7x rate of 8B per output token)</span>
+  <span class="leaf">settle_ledger(): PL/pgSQL batch - one transaction/hour via APScheduler or pg_cron</span>
+
+<span class="node">Database (Supabase/PostgreSQL):</span>
+  <span class="leaf">nodes, guild_admins, guild_members, job_queue</span>
+  <span class="leaf">inference_ledger, model_rates - immutable compute record</span>`},
+      {label:'Key Design Decisions', decisions:[
+        {title:'EIP-191 Wallet Auth at Protocol Level', body:'Guild membership is verified by checking the provider wallet address against an admin-signed admission record on every WebSocket connect, not just at login. Row-level spoofing without a valid administrator signature is cryptographically impossible without the admin private key.'},
+        {title:'Hourly Batch Settlement over Per-Inference Writes', body:'Crediting compute balance on each inference would require a write-lock per job - a bottleneck under load. Instead, inference_ledger is append-only (no contention) and settle_ledger() runs once per hour: one short transaction regardless of inference volume.'},
+        {title:'3-Layer Requeue Convergence', body:'All three fault paths (WS disconnect, dispatch timeout, APScheduler sweep) converge on the same requeue logic. This avoids duplicating recovery code and ensures any failure mode - including silent network partitions - eventually resolves through the sweeper.'},
+        {title:'Sanitization Sandbox Before Dispatch', body:'Prompt sanitization runs on the gateway before any content reaches a provider machine. Rejects pipe-to-shell patterns, fork bombs, reverse shells, and local file reads. Heuristic layer; guild trust is the primary security boundary.'},
+      ]},
+      {label:'Current Status', content:`<p>Functional MVP with the full end-to-end pipeline operational: provider registration, EIP-191 auth, smart dispatch, async job queue, 3-layer fault tolerance, inference ledger, and hourly settlement. In-memory store available for local development without a database. Ongoing work is focused on a consumer-facing credit dashboard, rate-limit enforcement per guild tier, and provider reputation scoring. Reach out to discuss federation design, trust model, or deployment on distributed infrastructure.</p>`}
+    ],
+    tags:['Python','FastAPI','WebSocket','PostgreSQL','PL/pgSQL','APScheduler','Ethereum EIP-191','Ollama','vLLM','Federated Compute','Async Job Queue','Compute Credits']
   },
 
   supplychain: {
