@@ -2015,6 +2015,11 @@ nav > .nav-links {
         <div class="arch-carousel-slide" id="car-slide-1"></div>
         <div class="arch-carousel-slide" id="car-slide-2"></div>
         <div class="arch-carousel-slide" id="car-slide-3"></div>
+        <div class="arch-carousel-slide" id="car-slide-4"></div>
+        <div class="arch-carousel-slide" id="car-slide-5"></div>
+        <div class="arch-carousel-slide" id="car-slide-6"></div>
+        <div class="arch-carousel-slide" id="car-slide-7"></div>
+        <div class="arch-carousel-slide" id="car-slide-8"></div>
       </div>
     </div>
     <div class="arch-carousel-nav">
@@ -2022,6 +2027,11 @@ nav > .nav-links {
       <button class="arch-carousel-dot" id="car-dot-1" onclick="carouselGo(1)"></button>
       <button class="arch-carousel-dot" id="car-dot-2" onclick="carouselGo(2)"></button>
       <button class="arch-carousel-dot" id="car-dot-3" onclick="carouselGo(3)"></button>
+      <button class="arch-carousel-dot" id="car-dot-4" onclick="carouselGo(4)"></button>
+      <button class="arch-carousel-dot" id="car-dot-5" onclick="carouselGo(5)"></button>
+      <button class="arch-carousel-dot" id="car-dot-6" onclick="carouselGo(6)"></button>
+      <button class="arch-carousel-dot" id="car-dot-7" onclick="carouselGo(7)"></button>
+      <button class="arch-carousel-dot" id="car-dot-8" onclick="carouselGo(8)"></button>
     </div>
     <div class="arch-carousel-label" id="car-label">AurumAI - Enterprise AI Control Plane</div>
   </div>
@@ -4274,6 +4284,189 @@ const ARCH_DATA = {
     ],
   },
 
+  safetyeye: {
+    title: 'SafetyEye - Manufacturing Safety CV Platform',
+    nodes: [
+      {id:'cameras', x:390, y:30,  w:175,h:48, layer:'frontend', label:'100+ Camera Feeds',     sub:'HD streams, 15 fps'},
+      {id:'decoder', x:100, y:120, w:145,h:54, layer:'engine',   label:'Stream Decoder',        sub:'Video decoder\n60s rolling buffer'},
+      {id:'infer',   x:270, y:120, w:155,h:54, layer:'engine',   label:'YOLOv8m TensorRT FP16', sub:'Quantized object detection'},
+      {id:'track',   x:450, y:120, w:140,h:48, layer:'engine',   label:'ByteTrack',             sub:'Multi-object tracking'},
+      {id:'rules',   x:615, y:120, w:155,h:54, layer:'engine',   label:'Rule Evaluator',        sub:'Zone/PPE/dwell\nproximity/ergonomic'},
+      {id:'clip',    x:100, y:240, w:155,h:54, layer:'engine',   label:'Clip Extractor',        sub:'Stream-copy <500ms\nEd25519 signing'},
+      {id:'ai',      x:290, y:240, w:155,h:48, layer:'model',    label:'Vision AI Model',       sub:'Failure mode classification'},
+      {id:'outbox',  x:480, y:240, w:155,h:54, layer:'engine',   label:'Durable Outbox',        sub:'Local WAL store-and-forward\nserver-side dedup'},
+      {id:'api',     x:390, y:365, w:185,h:48, layer:'control',  label:'FastAPI Control Plane', sub:'30+ routers'},
+      {id:'ts',      x:80,  y:460, w:155,h:54, layer:'data',     label:'TimescaleDB',           sub:'Violations hypertable\ncontinuous aggregates'},
+      {id:'geo',     x:265, y:460, w:150,h:54, layer:'data',     label:'PostGIS',               sub:'Zone polygons\nspatial queries'},
+      {id:'events',  x:450, y:460, w:155,h:54, layer:'data',     label:'Event Stream',          sub:'Consumer groups\nnotification fan-out'},
+      {id:'pg2',     x:640, y:460, w:145,h:48, layer:'data',     label:'PostgreSQL',            sub:'Audit, permits, devices'},
+      {id:'dash',    x:220, y:575, w:175,h:48, layer:'frontend', label:'Control Dashboard',     sub:'20+ pages, live WebSocket\nMobile PWA (4 pages)'},
+      {id:'integr',  x:530, y:575, w:165,h:48, layer:'external', label:'9 Integrations',        sub:'ERP, EHS, BI, maintenance\ncommunication, webhooks'},
+    ],
+    edges:[
+      {from:'cameras', to:'decoder',  type:'data'},
+      {from:'decoder', to:'infer',    type:'data'},
+      {from:'infer',   to:'track',    type:'data'},
+      {from:'track',   to:'rules',    type:'data'},
+      {from:'decoder', to:'clip',     type:'data'},
+      {from:'rules',   to:'clip',     type:'control'},
+      {from:'clip',    to:'ai',       type:'model'},
+      {from:'clip',    to:'outbox',   type:'data'},
+      {from:'ai',      to:'outbox',   type:'data'},
+      {from:'outbox',  to:'api',      type:'data'},
+      {from:'api',     to:'ts',       type:'data'},
+      {from:'api',     to:'geo',      type:'data'},
+      {from:'api',     to:'events',   type:'data'},
+      {from:'api',     to:'pg2',      type:'data'},
+      {from:'api',     to:'dash',     type:'control'},
+      {from:'api',     to:'integr',   type:'external'},
+      {from:'events',  to:'dash',     type:'data'},
+    ],
+  },
+
+  sitaware: {
+    title: 'SitAware - Global Situational Awareness Platform',
+    nodes: [
+      {id:'sources',  x:390, y:30,  w:185,h:54, layer:'external', label:'25 Data Sources',       sub:'Disaster, conflict, aviation\nmaritime, weather, ocean'},
+      {id:'conn',     x:120, y:135, w:155,h:54, layer:'engine',   label:'11 Connectors',         sub:'Per-source scheduling\n5min earthquakes to 24hr conflict'},
+      {id:'transl',   x:390, y:135, w:165,h:48, layer:'engine',   label:'Self-hosted Translation', sub:'Non-English source normalization'},
+      {id:'sched',    x:640, y:135, w:145,h:48, layer:'control',  label:'APScheduler',           sub:'Per-connector cadence'},
+      {id:'db',       x:220, y:250, w:165,h:54, layer:'data',     label:'Geospatial DB',         sub:'Unified incident schema\nPostGIS + hash-based upsert'},
+      {id:'cache',    x:530, y:250, w:155,h:54, layer:'data',     label:'Cache',                 sub:'Positions 15min-1h\nAI summaries 6h, token counters'},
+      {id:'api',      x:390, y:370, w:185,h:48, layer:'control',  label:'FastAPI (6 routers)',   sub:'/incidents /summary /tiles\n/sources /poptiles /news'},
+      {id:'ai1',      x:160, y:475, w:165,h:54, layer:'model',    label:'Fast Model',            sub:'Structured extraction\n(categories, severity, areas)'},
+      {id:'ai2',      x:420, y:475, w:165,h:54, layer:'model',    label:'Capable Model',         sub:'Human-readable\nregional briefing'},
+      {id:'budget',   x:650, y:475, w:155,h:54, layer:'engine',   label:'Token Budget',          sub:'490K daily ceiling\natomic reserve/rollback'},
+      {id:'map',      x:200, y:595, w:165,h:54, layer:'frontend', label:'Interactive Map',       sub:'8 layer categories\nviewport + time window filter'},
+      {id:'modal',    x:530, y:595, w:165,h:48, layer:'frontend', label:'Summary Modal',         sub:'Regional AI briefing\nper-source health bar'},
+    ],
+    edges:[
+      {from:'sources', to:'conn',    type:'external'},
+      {from:'sources', to:'transl',  type:'external'},
+      {from:'conn',    to:'sched',   type:'control'},
+      {from:'transl',  to:'conn',    type:'data'},
+      {from:'sched',   to:'conn',    type:'control'},
+      {from:'conn',    to:'db',      type:'data'},
+      {from:'conn',    to:'cache',   type:'data'},
+      {from:'db',      to:'api',     type:'data'},
+      {from:'cache',   to:'api',     type:'data'},
+      {from:'api',     to:'ai1',     type:'model'},
+      {from:'ai1',     to:'ai2',     type:'model'},
+      {from:'ai2',     to:'budget',  type:'control'},
+      {from:'budget',  to:'cache',   type:'data'},
+      {from:'api',     to:'map',     type:'control'},
+      {from:'api',     to:'modal',   type:'control'},
+    ],
+  },
+
+  aetheros: {
+    title: 'AetherOS - AI-Native Microkernel OS (Rust)',
+    nodes: [
+      {id:'ipc',     x:390, y:30,  w:185,h:54, layer:'engine',  label:'Zero-copy IPC Bus',    sub:'56-byte frames\nacquire/release ordering'},
+      {id:'sched',   x:90,  y:135, w:155,h:54, layer:'control', label:'Intent Scheduler',     sub:'KV-Cache as schedulable\nresource, memory pressure'},
+      {id:'memmap',  x:280, y:135, w:155,h:54, layer:'data',    label:'Memory Map',           sub:'RAM / Weight-Cache\nCluster / Persona regions'},
+      {id:'agttrait',x:470, y:135, w:155,h:54, layer:'control', label:'Agent Trait',          sub:'Capability bitflags\nAgent ID system'},
+      {id:'mempres', x:660, y:135, w:145,h:54, layer:'engine',  label:'Memory Pressure',      sub:'Normal / Elevated\nCritical / OOM watermarks'},
+      {id:'hal',     x:100, y:260, w:175,h:54, layer:'engine',  label:'Neural HAL (crate)',   sub:'Device discovery, bus enum\nAccelerator pool Hot/Warm/Cold'},
+      {id:'usdf',    x:380, y:260, w:175,h:54, layer:'data',    label:'USDF (crate)',         sub:'Vector store + ANN index\nFilesystem bridge: path -> vector'},
+      {id:'agents',  x:650, y:260, w:160,h:54, layer:'model',   label:'Ring-0 Agent Swarm',  sub:'Synthesis, Orchestrator\nCurator, MemoryOptimizer'},
+      {id:'synth',   x:90,  y:385, w:155,h:54, layer:'engine',  label:'Synthesis Agent',     sub:'HAL miss -> MMIO probe\n-> driver shim generation'},
+      {id:'orch',    x:280, y:385, w:155,h:48, layer:'control', label:'Orchestrator Agent',  sub:'Compute ledger\nhot-plug, cluster join'},
+      {id:'cluster', x:470, y:385, w:175,h:54, layer:'data',    label:'Cluster (crate)',     sub:'SWIM gossip protocol\ndistributed membership'},
+      {id:'accel',   x:660, y:385, w:155,h:54, layer:'engine',  label:'Accelerator Backends',sub:'JIT patch context\nmulti-target NPU/GPU'},
+      {id:'vector',  x:250, y:505, w:165,h:48, layer:'data',    label:'Embedding Index',     sub:'Approx nearest-neighbour\nsemantic_open(query, k)'},
+    ],
+    edges:[
+      {from:'ipc',      to:'sched',    type:'control'},
+      {from:'ipc',      to:'memmap',   type:'data'},
+      {from:'ipc',      to:'agttrait', type:'control'},
+      {from:'ipc',      to:'mempres',  type:'data'},
+      {from:'sched',    to:'hal',      type:'control'},
+      {from:'memmap',   to:'usdf',     type:'data'},
+      {from:'agttrait', to:'agents',   type:'control'},
+      {from:'hal',      to:'synth',    type:'control'},
+      {from:'hal',      to:'accel',    type:'data'},
+      {from:'usdf',     to:'vector',   type:'data'},
+      {from:'agents',   to:'orch',     type:'control'},
+      {from:'agents',   to:'cluster',  type:'data'},
+      {from:'synth',    to:'accel',    type:'data'},
+      {from:'orch',     to:'cluster',  type:'data'},
+    ],
+  },
+
+  supplychain: {
+    title: 'Supply Chain Intel - Analytics Platform',
+    nodes: [
+      {id:'erp',    x:90,  y:30,  w:140,h:54, layer:'external', label:'ERP (OData v4)',       sub:'OAuth2 token mgmt\n3 live endpoints'},
+      {id:'ariba',  x:255, y:30,  w:120,h:48, layer:'external', label:'Ariba / CDK',          sub:'Procurement'},
+      {id:'snflk',  x:400, y:30,  w:120,h:48, layer:'external', label:'Snowflake / TMS',      sub:'DW + logistics'},
+      {id:'synth',  x:545, y:30,  w:155,h:54, layer:'external', label:'Synthetic Connector',  sub:'Seeded, reproducible\nknown anomaly spike'},
+      {id:'conn',   x:390, y:135, w:185,h:54, layer:'engine',   label:'Connector Interface',  sub:'7-method uniform interface\n8 source adapters'},
+      {id:'orch',   x:390, y:230, w:185,h:48, layer:'control',  label:'Ingestion Orchestrator', sub:'Upsert + per-connector logs'},
+      {id:'tables', x:390, y:315, w:185,h:54, layer:'data',     label:'13 DB Tables',         sub:'Inventory, supplier, production\nwarranty, freight, demand...'},
+      {id:'daily',  x:80,  y:435, w:155,h:54, layer:'engine',   label:'Daily Metrics',        sub:'13 KPIs + 5 alert thresholds\n6am APScheduler'},
+      {id:'weekly', x:265, y:435, w:155,h:54, layer:'engine',   label:'Weekly Metrics',       sub:'Inventory turns\nforecast accuracy, cost'},
+      {id:'fcst',   x:450, y:435, w:155,h:54, layer:'engine',   label:'14-day Forecast',      sub:'40% trend + 60% MA\nweekend factor per part/region'},
+      {id:'anom',   x:640, y:435, w:155,h:54, layer:'engine',   label:'Anomaly Detection',    sub:'Z-score 60d baseline\nz>=2 warn / z>=3 critical'},
+      {id:'api',    x:390, y:560, w:185,h:48, layer:'control',  label:'API (13 endpoints)',   sub:'Metrics, anomalies, forecast\ningest trigger, CSV upload'},
+      {id:'dash',   x:180, y:655, w:175,h:48, layer:'frontend', label:'Dashboard',            sub:'KPI cards, 30d trend charts\nwarranty anomaly table + z-scores'},
+      {id:'sched',  x:570, y:655, w:145,h:48, layer:'control',  label:'APScheduler',          sub:'Ingest 15min / daily 6am\nweekly Monday 7am'},
+    ],
+    edges:[
+      {from:'erp',   to:'conn',   type:'external'},
+      {from:'ariba', to:'conn',   type:'external'},
+      {from:'snflk', to:'conn',   type:'external'},
+      {from:'synth', to:'conn',   type:'external'},
+      {from:'conn',  to:'orch',   type:'data'},
+      {from:'orch',  to:'tables', type:'data'},
+      {from:'tables',to:'daily',  type:'data'},
+      {from:'tables',to:'weekly', type:'data'},
+      {from:'tables',to:'fcst',   type:'data'},
+      {from:'tables',to:'anom',   type:'data'},
+      {from:'daily', to:'api',    type:'data'},
+      {from:'weekly',to:'api',    type:'data'},
+      {from:'fcst',  to:'api',    type:'data'},
+      {from:'anom',  to:'api',    type:'data'},
+      {from:'api',   to:'dash',   type:'control'},
+      {from:'sched', to:'orch',   type:'control'},
+      {from:'sched', to:'daily',  type:'control'},
+    ],
+  },
+
+  sovereigngrid: {
+    title: 'SovereignGrid - Decentralized P2P AI Compute Grid',
+    nodes: [
+      {id:'consumer', x:390, y:30,  w:185,h:54, layer:'frontend', label:'Consumer Agents',      sub:'POST /v1/chat/completions\nPOST /v1/jobs (async)'},
+      {id:'gateway',  x:390, y:130, w:185,h:54, layer:'control',  label:'FastAPI Gateway',      sub:'Smart dispatch\nSanitization sandbox'},
+      {id:'dispatch', x:120, y:245, w:160,h:54, layer:'engine',   label:'Smart Dispatch',       sub:'Least-loaded online node\nmodel-matching per request'},
+      {id:'auth',     x:390, y:245, w:160,h:54, layer:'engine',   label:'EIP-191 Auth',         sub:'Nonce challenge\nwallet signature verify'},
+      {id:'fault',    x:650, y:245, w:155,h:54, layer:'engine',   label:'Fault Tolerance',      sub:'3-layer requeue convergence\nAPScheduler 15s sweep'},
+      {id:'daemon1',  x:80,  y:370, w:155,h:54, layer:'external', label:'Provider Daemon A',    sub:'Ollama :11434\nguild-admitted wallet'},
+      {id:'daemon2',  x:260, y:370, w:155,h:54, layer:'external', label:'Provider Daemon B',    sub:'vLLM :8000\nguild-admitted wallet'},
+      {id:'guild',    x:470, y:370, w:160,h:54, layer:'data',     label:'Guild Registry',       sub:'guild_admins\nguild_members (admin-signed)'},
+      {id:'jobs',     x:660, y:370, w:145,h:54, layer:'data',     label:'Job Queue',            sub:'job_queue table\nmax_attempts + dead state'},
+      {id:'ledger',   x:160, y:490, w:165,h:54, layer:'data',     label:'Inference Ledger',     sub:'Append-only per completed job\nmodel_rates size-based pricing'},
+      {id:'pg',       x:440, y:490, w:175,h:48, layer:'data',     label:'PostgreSQL',           sub:'nodes, guild, jobs\ninference_ledger, model_rates'},
+      {id:'settle',   x:390, y:600, w:185,h:54, layer:'engine',   label:'settle_ledger()',      sub:'PL/pgSQL batch\n1 tx/hour (APScheduler or pg_cron)'},
+    ],
+    edges:[
+      {from:'consumer', to:'gateway',  type:'control'},
+      {from:'gateway',  to:'dispatch', type:'control'},
+      {from:'gateway',  to:'auth',     type:'control'},
+      {from:'gateway',  to:'fault',    type:'control'},
+      {from:'dispatch', to:'daemon1',  type:'external'},
+      {from:'dispatch', to:'daemon2',  type:'external'},
+      {from:'auth',     to:'guild',    type:'data'},
+      {from:'fault',    to:'jobs',     type:'data'},
+      {from:'daemon1',  to:'ledger',   type:'data'},
+      {from:'daemon2',  to:'ledger',   type:'data'},
+      {from:'guild',    to:'pg',       type:'data'},
+      {from:'jobs',     to:'pg',       type:'data'},
+      {from:'ledger',   to:'pg',       type:'data'},
+      {from:'pg',       to:'settle',   type:'data'},
+    ],
+  },
+
   quant: {
     title: 'QuantTradeAI - Financial Intelligence Platform',
     nodes: [
@@ -4694,12 +4887,17 @@ function archShowPanel(containerId, archKey) {
 }
 
 // ── CAROUSEL ─────────────────────────────────────────────────
-const CAR_KEYS   = ['aurum','optima','slmforge','quant'];
+const CAR_KEYS   = ['aurum','optima','slmforge','quant','safetyeye','sitaware','aetheros','supplychain','sovereigngrid'];
 const CAR_LABELS = [
   'AurumAI - Enterprise AI Control Plane',
   'OptimaLLM - AI Cost Optimisation Proxy',
   'SLM Forge - Local Fine-Tuning Platform',
   'QuantTradeAI - Financial Intelligence Platform',
+  'SafetyEye - Manufacturing Safety CV Platform',
+  'SitAware - Global Situational Awareness Platform',
+  'AetherOS - AI-Native Microkernel OS',
+  'Supply Chain Intel - Analytics Platform',
+  'SovereignGrid - Decentralized P2P AI Compute Grid',
 ];
 let carCurrent = 0;
 let carAutoTimer = null;
@@ -4740,7 +4938,7 @@ archStyle.textContent = `
 if (document.head) { document.head.appendChild(archStyle); }
 else { document.addEventListener('DOMContentLoaded', () => document.head.appendChild(archStyle)); }
 
-// ── INIT: render all 4 carousel slides + wire case studies ───
+// ── INIT: render all 9 carousel slides + wire case studies ───
 window.addEventListener('DOMContentLoaded', () => {
   // Carousel slides
   CAR_KEYS.forEach((key, i) => renderArch(`car-slide-${i}`, key));
