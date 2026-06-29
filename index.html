@@ -1487,7 +1487,7 @@ nav > .nav-links {
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-logo">RS.dev</a>
+  <a href="#" class="nav-logo" onclick="event.preventDefault();document.getElementById('secret-overlay').classList.toggle('active')" title="Engineer Control Room [E]">RS.dev</a>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#programs">Programs</a>
@@ -2496,7 +2496,7 @@ nav > .nav-links {
 <div id="keystroke-hint">
   <strong style="color:var(--text)">Secret Shortcuts</strong><br>
   <kbd>?</kbd> - This menu<br>
-  <kbd>E</kbd> - Engineer Mode<br>
+  <kbd>E</kbd> - Engineer Control Room<br>
   <kbd>M</kbd> - Matrix rain<br>
   <kbd>Konami</kbd> - 🎮 Control Room<br>
   <kbd>Esc</kbd> - Close all
@@ -2746,11 +2746,16 @@ document.addEventListener('keydown', e => {
 
   if (document.activeElement.matches('input')) return;
 
-  // E = Engineer Mode
+  // E = Engineer Control Room toggle
   if (e.key==='e'||e.key==='E') {
-    const b = document.getElementById('pm-mode-banner');
-    b.classList.toggle('visible');
-    if (b.classList.contains('visible')) setTimeout(()=>b.classList.remove('visible'),5000);
+    const ov = document.getElementById('secret-overlay');
+    if (ov.classList.contains('active')) {
+      ov.classList.remove('active');
+      document.getElementById('eng-modal').classList.remove('active');
+      stopOscilloscope();
+    } else {
+      ov.classList.add('active');
+    }
   }
   // M = Matrix
   if (e.key==='m'||e.key==='M') toggleMatrix();
