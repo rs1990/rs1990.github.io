@@ -2511,7 +2511,7 @@ nav > .nav-links {
     <div class="secret-card" onclick="openModal('oscilloscope')"><div class="secret-card-icon">📈</div><div class="secret-card-label">Signal Oscilloscope</div></div>
     <div class="secret-card" onclick="openModal('sysmap')"><div class="secret-card-icon">🗺️</div><div class="secret-card-label">System Architecture</div></div>
     <div class="secret-card" onclick="openModal('raid')"><div class="secret-card-icon">⚠️</div><div class="secret-card-label">RAID / Risk Log</div></div>
-    <div class="secret-card" onclick="openModal('github')"><div class="secret-card-icon">⚡</div><div class="secret-card-label">Repo Explorer</div></div>
+    <div class="secret-card" onclick="openModal('systems')"><div class="secret-card-icon">🌐</div><div class="secret-card-label">Systems Thinking</div></div>
     <div class="secret-card" onclick="openModal('canbus')"><div class="secret-card-icon">🔌</div><div class="secret-card-label">CAN Bus Sim</div></div>
   </div>
   <div class="secret-close-hint">Press <kbd>Escape</kbd> to close</div>
@@ -2910,23 +2910,112 @@ const modalContent = {
       </table>
     `
   },
-  github: {
-    title: 'GitHub Repository Explorer',
-    sub: '// github.com/rs1990 · 60+ public repos',
+  systems: {
+    title: 'Systems Thinking',
+    sub: '// Large-scale distributed architecture · how modern platforms are built',
     html: () => `
-      <div class="github-grid">
-        ${[
-          {name:'QuadSYSspline',desc:'Neural Network Backstepping controller for quadcopters',lang:'C++',url:'https://github.com/rs1990/QuadSYSspline'},
-          {name:'Intelligent-Control-Systems',desc:'MATLAB implementations of intelligent control algorithms',lang:'MATLAB',url:'https://github.com/rs1990/Intelligent-Control-Systems'},
-          {name:'Median_filter',desc:'LIDAR noise reduction via threshold + median filter',lang:'C++',url:'https://github.com/rs1990/Median_filter'},
-          {name:'Embedded_projects_PIC33F',desc:'Embedded systems projects on PIC33F microcontroller',lang:'C',url:'https://github.com/rs1990/Embedded_projects_PIC33F'},
-          {name:'Real-time-Data-Acquisition',desc:'OpenMP · parallel threading · FPGA · server-client',lang:'C',url:'https://github.com/rs1990/Real-time-Data-Acquisition'},
-          {name:'View all 60+ repos →',desc:'Browse the full GitHub profile',lang:'',url:'https://github.com/rs1990?tab=repositories'},
-        ].map(r => `<a href="${r.url}" target="_blank" class="gh-card">
-          <div class="gh-card-title">⚡ ${r.name}</div>
-          <div class="gh-card-desc">${r.desc}</div>
-          ${r.lang ? `<span class="gh-lang">${r.lang}</span>` : ''}
-        </a>`).join('')}
+      <div style="margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="obd-btn sys-tab-btn active" id="stab-netflix" onclick="showSysTab('netflix')">Netflix</button>
+        <button class="obd-btn sys-tab-btn" style="background:var(--surface);color:var(--text-muted);border:1px solid var(--border)" id="stab-whatsapp" onclick="showSysTab('whatsapp')">WhatsApp</button>
+        <button class="obd-btn sys-tab-btn" style="background:var(--surface);color:var(--text-muted);border:1px solid var(--border)" id="stab-uber" onclick="showSysTab('uber')">Uber</button>
+      </div>
+
+      <!-- NETFLIX -->
+      <div id="systab-netflix" style="font-family:var(--font-mono)">
+        ${buildSysLayers([
+          {label:'L5 · CLIENT', color:'#818CF8', rows:[
+            {n:'Web Browser',d:'React SPA'},
+            {n:'iOS / Android',d:'Native streaming app'},
+            {n:'Smart TV',d:'Embedded SDK'},
+            {n:'Gaming Console',d:'HDCP-encrypted stream'},
+          ]},
+          {label:'L4 · CDN', color:'#22D3EE', rows:[
+            {n:'Open Connect',d:'Netflix PoPs · 95% traffic served at edge'},
+            {n:'AWS CloudFront',d:'Fallback CDN · long-tail content'},
+            {n:'Adaptive Bitrate',d:'HLS / DASH · quality ladder per network'},
+            {n:'CMAF Packaging',d:'Single encode → multi-codec output'},
+          ]},
+          {label:'L3 · API GATEWAY', color:'#F59E0B', rows:[
+            {n:'Zuul Gateway',d:'Dynamic routing · request filtering'},
+            {n:'AWS ELB',d:'Load balancing across AZs'},
+            {n:'Hystrix',d:'Circuit breaker · fault isolation'},
+            {n:'Ribbon',d:'Client-side load balancing · retries'},
+          ]},
+          {label:'L2 · MICROSERVICES', color:'#10B981', rows:[
+            {n:'Recommendations',d:'ML ranker · 80% of content watched'},
+            {n:'Streaming Engine',d:'Playback session · DRM (Widevine)'},
+            {n:'Search Service',d:'Elasticsearch · title + metadata'},
+            {n:'Auth / IAM',d:'OAuth2 · device mgmt · profiles'},
+            {n:'Billing',d:'Subscription · payment processing'},
+            {n:'Metadata',d:'Title catalog · artwork · localization'},
+          ]},
+          {label:'L1 · DATA', color:'#F59E0B', rows:[
+            {n:'Apache Cassandra',d:'User viewing history · NoSQL · multi-region'},
+            {n:'Amazon S3',d:'Video files · thumbnails · CDN origin'},
+            {n:'Apache Kafka',d:'Event streaming · 700B+ events/day'},
+            {n:'EVCache (memcached)',d:'API response cache · microsecond reads'},
+          ]},
+        ])}
+      </div>
+
+      <!-- WHATSAPP -->
+      <div id="systab-whatsapp" style="font-family:var(--font-mono);display:none">
+        ${buildSysLayers([
+          {label:'L4 · CLIENT', color:'#818CF8', rows:[
+            {n:'iOS App',d:'Swift · Signal Protocol E2E'},
+            {n:'Android App',d:'Kotlin · 2B+ active users'},
+            {n:'WhatsApp Web',d:'WebSocket · mirrored from phone'},
+            {n:'Business API',d:'Webhook-driven · enterprise messaging'},
+          ]},
+          {label:'L3 · EDGE / CONNECTION', color:'#22D3EE', rows:[
+            {n:'Load Balancer',d:'HAProxy · anycast routing by region'},
+            {n:'Connection Servers',d:'Erlang/OTP · 2M+ connections per node'},
+            {n:'XMPP (ejabberd)',d:'Modified for WhatsApp scale · presence'},
+            {n:'Media Relay',d:'TURN / STUN servers for calls + media'},
+          ]},
+          {label:'L2 · MESSAGING CORE', color:'#10B981', rows:[
+            {n:'Signal Protocol',d:'E2E encryption · Double Ratchet algorithm'},
+            {n:'Message Queue',d:'Offline delivery · 30-day retention'},
+            {n:'Group Fanout',d:'Fan-out on write · up to 1024 members'},
+            {n:'Status / Stories',d:'24h ephemeral · separate delivery path'},
+          ]},
+          {label:'L1 · DATA', color:'#F59E0B', rows:[
+            {n:'Mnesia',d:'Erlang in-memory DB · session + routing state'},
+            {n:'Amazon S3',d:'Media files (images, video, audio, docs)'},
+            {n:'MySQL',d:'Account data · contact graph · phone mapping'},
+            {n:'Apache Kafka',d:'Analytics events · spam detection pipeline'},
+          ]},
+        ])}
+      </div>
+
+      <!-- UBER -->
+      <div id="systab-uber" style="font-family:var(--font-mono);display:none">
+        ${buildSysLayers([
+          {label:'L4 · CLIENT', color:'#818CF8', rows:[
+            {n:'Rider App',d:'Real-time map · ETA · payment'},
+            {n:'Driver App',d:'Navigation · earnings · acceptance'},
+            {n:'Web Dashboard',d:'Trip history · analytics · Eats'},
+            {n:'Uber Eats',d:'Separate stack · shares dispatch infra'},
+          ]},
+          {label:'L3 · GATEWAY + PLATFORM', color:'#22D3EE', rows:[
+            {n:'API Gateway',d:'Auth · rate limiting · routing'},
+            {n:'Surge Pricing',d:'Real-time supply/demand model · per hex cell'},
+            {n:'Maps / ETA',d:'H3 geospatial index · road graph · ML ETA'},
+            {n:'Notifications',d:'Push · SMS · in-app · driver alerts'},
+          ]},
+          {label:'L2 · CORE SERVICES', color:'#10B981', rows:[
+            {n:'Dispatch Engine',d:'Match rider ↔ driver · Ringpop consistent hash'},
+            {n:'Trip Management',d:'State machine · lifecycle · receipts'},
+            {n:'Payment Processing',d:'Braintree · fraud detection · splits'},
+            {n:'Driver Supply',d:'Forecasting · incentives · positioning'},
+          ]},
+          {label:'L1 · DATA', color:'#F59E0B', rows:[
+            {n:'MySQL / Schemaless',d:'Trips · users · Cassandra under the hood'},
+            {n:'Apache Kafka',d:'Location pings · 1M msgs/sec at peak'},
+            {n:'Redis',d:'Geospatial index · driver location · pub/sub'},
+            {n:'Presto / Hadoop',d:'Analytics · surge model training · batch'},
+          ]},
+        ])}
       </div>
     `
   },
@@ -2956,6 +3045,35 @@ function openModal(key) {
   if (key==='oscilloscope') startOscilloscope('sin');
   if (key==='canbus') startCAN();
 }
+function buildSysLayers(layers) {
+  const arrows = ['▲ requests up &nbsp;|&nbsp; responses down ▼','▲ parsed data &nbsp;|&nbsp; commands down ▼','▲ business logic &nbsp;|&nbsp; data queries ▼','▲ raw data &nbsp;|&nbsp; config down ▼'];
+  return layers.map((layer, i) => `
+    <div style="margin-bottom:4px">
+      <div style="font-size:9px;color:${layer.color};letter-spacing:0.12em;margin-bottom:5px;padding-left:2px">${layer.label}</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:5px">
+        ${layer.rows.map(r=>`<div style="background:${layer.color}12;border:1px solid ${layer.color}33;border-radius:6px;padding:8px 10px">
+          <div style="font-size:10px;font-weight:700;color:${layer.color};margin-bottom:2px">${r.n}</div>
+          <div style="font-size:9px;color:var(--text-dim);line-height:1.4">${r.d}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+    ${i < layers.length-1 ? `<div style="text-align:center;color:var(--text-dim);font-size:11px;line-height:1;margin:3px 0">${arrows[i]||'↕'}</div>` : ''}
+  `).join('');
+}
+
+function showSysTab(tab) {
+  ['netflix','whatsapp','uber'].forEach(t => {
+    const el = document.getElementById('systab-'+t);
+    const btn = document.getElementById('stab-'+t);
+    if (!el || !btn) return;
+    const active = t === tab;
+    el.style.display = active ? 'block' : 'none';
+    btn.style.background = active ? 'var(--amber)' : 'var(--surface)';
+    btn.style.color = active ? 'var(--bg)' : 'var(--text-muted)';
+    btn.style.border = active ? 'none' : '1px solid var(--border)';
+  });
+}
+
 function closeModal() {
   document.getElementById('eng-modal').classList.remove('active');
   stopOscilloscope();
