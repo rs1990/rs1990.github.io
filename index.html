@@ -2801,33 +2801,91 @@ const modalContent = {
     `
   },
   sysmap: {
-    title: 'System Architecture Map',
-    sub: '// Automotive Diagnostic Stack',
+    title: 'Automotive Diagnostic Stack',
+    sub: '// Layered architecture · Physical → Protocol → Application → Tooling',
     html: () => `
-      <div class="sys-grid">
-        ${[
-          {icon:'🔌',name:'CAN Bus',desc:'250kbps / 500kbps',ok:true},
-          {icon:'🧠',name:'ECU',desc:'Engine Control Unit',ok:true},
-          {icon:'📡',name:'OBD-II Port',desc:'J1979 Protocol',ok:true},
-          {icon:'⚙️',name:'AUTOSAR BSW',desc:'Basic SW Layer',ok:true},
-          {icon:'🔥',name:'Misfire Det.',desc:'ML-based algorithm',ok:true},
-          {icon:'💨',name:'After-Treatment',desc:'SCR / DPF / DOC',ok:true},
-          {icon:'⚡',name:'BMS',desc:'Battery Mgmt System',ok:false},
-          {icon:'📊',name:'Calibration',desc:'ATI Vision / INCA',ok:true},
-          {icon:'🤖',name:'ML Engine',desc:'Optimization + NN',ok:true},
-          {icon:'📋',name:'DTC Logger',desc:'Fault code storage',ok:true},
-          {icon:'🛰️',name:'Telematics',desc:'Fleet diagnostics',ok:false},
-          {icon:'🧪',name:'HIL Testing',desc:'Hardware-in-loop',ok:true},
-        ].map(n => `
-          <div class="sys-node">
-            <div class="sys-node-icon">${n.icon}</div>
-            <div class="sys-node-name"><span class="sys-status ${n.ok?'sys-ok':'sys-warn'}"></span>${n.name}</div>
-            <div class="sys-node-desc">${n.desc}</div>
+      <div style="font-family:var(--font-mono);width:100%;overflow-x:auto">
+
+        <!-- LEGEND -->
+        <div style="display:flex;gap:20px;margin-bottom:18px;font-size:10px;color:var(--text-dim)">
+          <span><span style="color:var(--amber)">■</span> Physical</span>
+          <span><span style="color:var(--cyan)">■</span> Protocol</span>
+          <span><span style="color:var(--mint)">■</span> Application</span>
+          <span><span style="color:#818CF8">■</span> Tooling</span>
+          <span style="margin-left:auto"><span style="color:var(--mint)">●</span> Active &nbsp;<span style="color:var(--amber)">●</span> WIP</span>
+        </div>
+
+        <!-- LAYER 4: TOOLING -->
+        <div style="margin-bottom:6px">
+          <div style="font-size:9px;color:#818CF8;letter-spacing:0.12em;margin-bottom:6px;padding-left:4px">LAYER 4 · TOOLING &amp; VALIDATION</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+            ${[
+              {n:'ATI Vision',d:'ECU cal + measurement',ok:true},
+              {n:'INCA (ETAS)',d:'Online calibration + recording',ok:true},
+              {n:'MATLAB / Simulink',d:'Model-based control design',ok:true},
+              {n:'HIL Test Bench',d:'Hardware-in-loop validation',ok:true},
+            ].map(x=>`<div style="background:rgba(129,140,248,0.07);border:1px solid rgba(129,140,248,0.25);border-radius:6px;padding:10px 10px 8px">
+              <div style="font-size:11px;font-weight:700;color:#818CF8;margin-bottom:3px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${x.ok?'var(--mint)':'var(--amber)'};margin-right:5px;vertical-align:middle"></span>${x.n}</div>
+              <div style="font-size:10px;color:var(--text-dim)">${x.d}</div>
+            </div>`).join('')}
           </div>
-        `).join('')}
-      </div>
-      <div style="margin-top:16px;font-size:11px;color:var(--text-dim);font-family:var(--font-mono)">
-        <span style="color:var(--mint)">●</span> Active &nbsp; <span style="color:var(--amber)">●</span> In Progress / Planned
+        </div>
+
+        <!-- ARROW DOWN -->
+        <div style="text-align:center;color:var(--text-dim);font-size:13px;line-height:1;margin:2px 0">▲ data flows up &nbsp;|&nbsp; config flows down ▼</div>
+
+        <!-- LAYER 3: APPLICATION -->
+        <div style="margin-bottom:6px;margin-top:4px">
+          <div style="font-size:9px;color:var(--mint);letter-spacing:0.12em;margin-bottom:6px;padding-left:4px">LAYER 3 · APPLICATION SOFTWARE</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+            ${[
+              {n:'Misfire Detection',d:'ML + threshold algorithm · PACCAR P14',ok:true},
+              {n:'DTC Logger',d:'Fault code storage · J1979 DTCs',ok:true},
+              {n:'Aftertreatment Cal',d:'SCR / DPF / DOC · PFS calibration',ok:true},
+              {n:'BMS Integration',d:'Battery mgmt · EV extension (WIP)',ok:false},
+            ].map(x=>`<div style="background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.25);border-radius:6px;padding:10px 10px 8px">
+              <div style="font-size:11px;font-weight:700;color:var(--mint);margin-bottom:3px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${x.ok?'var(--mint)':'var(--amber)'};margin-right:5px;vertical-align:middle"></span>${x.n}</div>
+              <div style="font-size:10px;color:var(--text-dim)">${x.d}</div>
+            </div>`).join('')}
+          </div>
+        </div>
+
+        <div style="text-align:center;color:var(--text-dim);font-size:13px;line-height:1;margin:2px 0">▲ parsed signals &nbsp;|&nbsp; commands ▼</div>
+
+        <!-- LAYER 2: PROTOCOL -->
+        <div style="margin-bottom:6px;margin-top:4px">
+          <div style="font-size:9px;color:var(--cyan);letter-spacing:0.12em;margin-bottom:6px;padding-left:4px">LAYER 2 · PROTOCOL &amp; MIDDLEWARE</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+            ${[
+              {n:'CAN Bus',d:'250 / 500 kbps · CAN 2.0A/B · J1939',ok:true},
+              {n:'OBD-II / J1979',d:'Mode $01–$0A · DTC read/clear · PIDs',ok:true},
+              {n:'AUTOSAR BSW',d:'RTE · COM · DCM · DEM stacks',ok:true},
+              {n:'Diagnostic Session',d:'ISO 14229 UDS · ECU flashing',ok:true},
+            ].map(x=>`<div style="background:rgba(34,211,238,0.07);border:1px solid rgba(34,211,238,0.25);border-radius:6px;padding:10px 10px 8px">
+              <div style="font-size:11px;font-weight:700;color:var(--cyan);margin-bottom:3px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${x.ok?'var(--mint)':'var(--amber)'};margin-right:5px;vertical-align:middle"></span>${x.n}</div>
+              <div style="font-size:10px;color:var(--text-dim)">${x.d}</div>
+            </div>`).join('')}
+          </div>
+        </div>
+
+        <div style="text-align:center;color:var(--text-dim);font-size:13px;line-height:1;margin:2px 0">▲ raw signals &nbsp;|&nbsp; actuator commands ▼</div>
+
+        <!-- LAYER 1: PHYSICAL -->
+        <div style="margin-top:4px">
+          <div style="font-size:9px;color:var(--amber);letter-spacing:0.12em;margin-bottom:6px;padding-left:4px">LAYER 1 · PHYSICAL HARDWARE</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+            ${[
+              {n:'Engine / Cylinder',d:'HD diesel · PACCAR P14 · misfire source',ok:true},
+              {n:'Sensors',d:'Crankshaft · camshaft · lambda · MAP',ok:true},
+              {n:'ECU',d:'Engine Control Unit · main compute node',ok:true},
+              {n:'Actuators',d:'Injectors · EGR · throttle · SCR dosing',ok:true},
+            ].map(x=>`<div style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.25);border-radius:6px;padding:10px 10px 8px">
+              <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:3px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${x.ok?'var(--mint)':'var(--amber)'};margin-right:5px;vertical-align:middle"></span>${x.n}</div>
+              <div style="font-size:10px;color:var(--text-dim)">${x.d}</div>
+            </div>`).join('')}
+          </div>
+        </div>
+
       </div>
     `
   },
