@@ -17,9 +17,12 @@ Owner: Raghavendra Sriram (raghu.s1211@gmail.com)
 
 ## Key sections
 - Hero: #hero
+- About: #about
+- Programs: #programs (3 PM initiative cards - DAF P14, MY22-27, Cummins)
 - Timeline: #experience  
 - Projects: #projects (8 cards + arch carousel)
 - Skills: #skills
+- Downloads: #downloads (ClaudeCosts open source)
 - Tools: 10 everyday tools section
 - Contact: #contact
 
