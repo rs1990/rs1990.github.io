@@ -2037,42 +2037,15 @@ nav > .nav-links {
   <!-- RESEARCH / ENGINEERING PROJECTS -->
   <div style="margin-top:64px">
     <div class="section-label" style="margin-bottom:24px">Earlier Research &amp; Engineering</div>
-    <div class="projects-grid">
-      <div class="project-card reveal">
-        <div class="project-icon">&#x1F681;</div>
-        <div class="project-title">Autonomous Formation Flight</div>
-        <div class="project-desc">Multi-agent consensus algorithms on MAVs achieving 3D formation flights inside a VICON motion capture environment.</div>
-        <div class="project-metric">Multi-MAV &middot; UTARI Autonomous Systems Lab</div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-icon">&#x1F916;</div>
-        <div class="project-title">Neural Net Quadcopter Controller</div>
-        <div class="project-desc">C++ Neural Network Backstepping controller for quadcopters based on Das, Lewis &amp; Subbarao&#x2019;s adaptive control paper.</div>
-        <div class="project-metric"><a href="https://github.com/rs1990/QuadSYSspline" target="_blank" class="project-link">github.com/rs1990/QuadSYSspline &#x2197;</a></div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-icon">&#x1F44B;</div>
-        <div class="project-title">Gesture-Based UAV Control</div>
-        <div class="project-desc">ArDrone control via Microsoft Kinect. Custom calibration sequence improved positioning accuracy by ~15%.</div>
-        <div class="project-metric">~15% accuracy improvement via calibration</div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-icon">&#x1F4E1;</div>
-        <div class="project-title">LIDAR Noise Filter</div>
-        <div class="project-desc">Real-time median + threshold filter in C++ for cleaning noisy LIDAR data on mobile robotic platforms.</div>
-        <div class="project-metric"><a href="https://github.com/rs1990/Median_filter" target="_blank" class="project-link">github.com/rs1990/Median_filter &#x2197;</a></div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-icon">&#x26A1;</div>
-        <div class="project-title">Real-Time DAQ Board</div>
-        <div class="project-desc">Custom DAQ board for 20+ sensors on a robotic skin platform, communicating with NI cRIO via SPI.</div>
-        <div class="project-metric">20+ sensor channels &middot; SPI &middot; NI cRIO</div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-icon">&#x1F5A5;</div>
-        <div class="project-title">RTOS on dsPIC33F</div>
-        <div class="project-desc">Co-operative or Pre-emptive RTOS built from scratch in Embedded C on a 16-bit dsPIC33F microcontroller.</div>
-        <div class="project-metric"><a href="https://github.com/rs1990/Embedded_projects_PIC33F" target="_blank" class="project-link">GitHub &#x2197;</a></div>
+    <div class="project-card reveal" onclick="openResearch()" style="cursor:pointer;max-width:520px;border-color:rgba(129,140,248,0.3)">
+      <div class="project-icon">&#x1F681;</div>
+      <div class="project-title" style="color:var(--indigo)">Graduate Research - UTARI &middot; 2013-2017</div>
+      <div class="project-desc">Autonomous Systems Lab · UAV formation flight · CNN object classifier · DAQ hardware · RTOS. Under Dr. Frank L. Lewis at UT Arlington Research Institute.</div>
+      <div class="project-metric" style="display:flex;gap:18px;margin-top:12px">
+        <span>$200K+ lab</span>
+        <span>6 projects</span>
+        <span>20+ students mentored</span>
+        <span style="color:var(--indigo);font-weight:600">View details &#x2197;</span>
       </div>
     </div>
   </div>
@@ -4100,6 +4073,80 @@ function openCase(key) {
       if (pre.parentNode) { pre.parentNode.replaceChild(wrap, pre); renderArch(wrap.id, key); }
     });
   }, 80);
+}
+
+function openResearch() {
+  const html = `
+    <button class="cs-back" onclick="closeResearch()">&#x2190; Back</button>
+    <div class="cs-eyebrow">Graduate Research &middot; UTARI &middot; 2013-2017</div>
+    <div class="cs-title">Autonomous Systems &amp; Robotics Research</div>
+    <div class="cs-tagline">University of Texas Arlington Research Institute &middot; Dr. Frank L. Lewis</div>
+    <div class="cs-meta-row">
+      <div class="cs-meta-item"><div class="cs-meta-label">Lab</div><div class="cs-meta-val">UTARI Autonomous Systems Lab</div></div>
+      <div class="cs-meta-item"><div class="cs-meta-label">Duration</div><div class="cs-meta-val">2013 - 2017 (4 years)</div></div>
+      <div class="cs-meta-item"><div class="cs-meta-label">Role</div><div class="cs-meta-val">Graduate Research + Teaching Assistant</div></div>
+      <div class="cs-meta-item"><div class="cs-meta-label">Thesis</div><div class="cs-meta-val">Multi-source UAV object classification via CNN</div></div>
+    </div>
+    <div class="cs-metrics">
+      <div class="cs-metric-card"><div class="cs-metric-num">$200K+</div><div class="cs-metric-lbl">Lab equipment procured</div></div>
+      <div class="cs-metric-card"><div class="cs-metric-num">6</div><div class="cs-metric-lbl">Research projects</div></div>
+      <div class="cs-metric-card"><div class="cs-metric-num">20+</div><div class="cs-metric-lbl">MS students mentored</div></div>
+      <div class="cs-metric-card"><div class="cs-metric-num">~15%</div><div class="cs-metric-lbl">UAV positioning accuracy gain</div></div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-title">&#x1F681; Autonomous Formation Flight</div>
+      <div class="cs-body"><p>Multi-agent consensus algorithms on micro air vehicles achieving 3D formation flights in a VICON motion capture environment. Implemented distributed control protocols for swarm coordination.</p></div>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-title">&#x1F916; Neural Net Quadcopter Controller</div>
+      <div class="cs-body"><p>C++ Neural Network Backstepping controller for quadcopters based on Das, Lewis &amp; Subbarao adaptive control. Published as QuadSYSspline on GitHub. <a href="https://github.com/rs1990/QuadSYSspline" target="_blank" style="color:var(--cyan)">github.com/rs1990/QuadSYSspline &#x2197;</a></p></div>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-title">&#x1F4F7; Multi-Source UAV Object Classifier (MS Thesis)</div>
+      <div class="cs-body"><p>Multi-class object classifier and tracker for swarm UAV video feeds using TensorFlow + CNNs deployed on a modified S1000 octa-rotor powered by NVIDIA Jetson TX2. Real-time inference on-device.</p></div>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-title">&#x1F44B; Gesture-Based UAV Control</div>
+      <div class="cs-body"><p>ArDrone control via Microsoft Kinect gesture recognition. Custom calibration sequence improved positioning accuracy by ~15%. Demonstrated at UTARI lab showcase.</p></div>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-title">&#x1F4E1; LIDAR Noise Filter</div>
+      <div class="cs-body"><p>Real-time median + threshold filter in C++ for cleaning noisy LIDAR data on mobile robotic platforms. <a href="https://github.com/rs1990/Median_filter" target="_blank" style="color:var(--cyan)">github.com/rs1990/Median_filter &#x2197;</a></p></div>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-title">&#x26A1; Real-Time DAQ Board</div>
+      <div class="cs-body"><p>Custom data acquisition board for 20+ sensors on a robotic skin platform. SPI communication with NI cRIO. Designed PCB and firmware from scratch for the smart skin cell project.</p></div>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-title">&#x1F5A5; RTOS on dsPIC33F</div>
+      <div class="cs-body"><p>Co-operative and pre-emptive RTOS built from scratch on a 16-bit dsPIC33F microcontroller. Context switching, task scheduler, semaphores. <a href="https://github.com/rs1990/Embedded_projects_PIC33F" target="_blank" style="color:var(--cyan)">GitHub &#x2197;</a></p></div>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-title">&#x1F4DA; Teaching (2014-2017)</div>
+      <div class="cs-body"><p>Graduate Teaching Assistant: Linear Control, Optimal Control, Distributed Control, Intelligent Control Systems, Digital Signal Processing. 100+ students/semester. Developed lab materials and assessment frameworks.</p></div>
+    </div>
+
+    <div class="cs-tags">
+      <span class="cs-tag">TensorFlow</span><span class="cs-tag">CNN</span><span class="cs-tag">ROS</span>
+      <span class="cs-tag">VICON</span><span class="cs-tag">NVIDIA Jetson TX2</span><span class="cs-tag">C++</span>
+      <span class="cs-tag">MATLAB</span><span class="cs-tag">NI cRIO</span><span class="cs-tag">dsPIC33F</span>
+      <span class="cs-tag">Control Theory</span><span class="cs-tag">UAV</span><span class="cs-tag">Multi-Agent</span>
+    </div>
+    <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);display:flex;gap:14px;flex-wrap:wrap">
+      <a href="mailto:raghu.s1211@gmail.com" class="btn-primary">&#x1F4EC; Discuss This Work</a>
+      <button onclick="closeResearch()" class="btn-secondary">&#x2190; Back</button>
+    </div>
+  `;
+  document.getElementById('case-inner').innerHTML = html;
+  const ov = document.getElementById('case-overlay');
+  ov.style.display = 'block'; ov.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeResearch() {
+  document.getElementById('case-overlay').style.display = 'none';
+  document.body.style.overflow = '';
 }
 
 function closeCase() {
