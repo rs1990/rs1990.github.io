@@ -4,6 +4,9 @@
 Single-file portfolio site: index.html (~4,600 lines)
 Owner: Raghavendra Sriram (raghu.s1211@gmail.com)
 
+## Permissions
+- No need to ask permission before reading or editing any file in this project. Proceed autonomously.
+
 ## Rules
 - Never add specific vendor/product names to case studies (keep generic)
 - No em dashes — use hyphens only
