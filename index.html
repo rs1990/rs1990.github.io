@@ -2106,6 +2106,8 @@ nav > .nav-links {
         <div class="arch-carousel-slide" id="car-slide-6"></div>
         <div class="arch-carousel-slide" id="car-slide-7"></div>
         <div class="arch-carousel-slide" id="car-slide-8"></div>
+        <div class="arch-carousel-slide" id="car-slide-9"></div>
+        <div class="arch-carousel-slide" id="car-slide-10"></div>
       </div>
     </div>
     <div class="arch-carousel-nav">
@@ -2118,6 +2120,8 @@ nav > .nav-links {
       <button class="arch-carousel-dot" id="car-dot-6" onclick="carouselGo(6)"></button>
       <button class="arch-carousel-dot" id="car-dot-7" onclick="carouselGo(7)"></button>
       <button class="arch-carousel-dot" id="car-dot-8" onclick="carouselGo(8)"></button>
+      <button class="arch-carousel-dot" id="car-dot-9" onclick="carouselGo(9)"></button>
+      <button class="arch-carousel-dot" id="car-dot-10" onclick="carouselGo(10)"></button>
     </div>
     <div class="arch-carousel-label" id="car-label">AurumAI - Enterprise AI Control Plane</div>
   </div>
@@ -4797,6 +4801,61 @@ const ARCH_DATA = {
     ],
   },
 
+  clawstreet: {
+    title: 'ClawStreet - Agentic Trading via Claude Code',
+    nodes: [
+      {id:'cron',    x:390,y:30,  w:170,h:48, layer:'control',  label:'Cron Scheduler',      sub:'scan/checkin/flatten\nanalytics/smoketest'},
+      {id:'runner',  x:390,y:120, w:170,h:48, layer:'control',  label:'Session Runner',      sub:'run_session.sh -> claude -p'},
+      {id:'claude',  x:390,y:210, w:170,h:54, layer:'model',    label:'Claude Code',         sub:'Reads strategy config\nheadless session'},
+      {id:'config',  x:120,y:330, w:165,h:54, layer:'data',     label:'Strategy Config',     sub:'Entry/exit rules\nrisk params, phase status'},
+      {id:'mcp',     x:390,y:330, w:165,h:48, layer:'external', label:'Brokerage MCP',       sub:'Quotes, orders, portfolio'},
+      {id:'dash',    x:640,y:330, w:165,h:54, layer:'frontend', label:'Local Dashboard',     sub:'Tighten-only param API\ntimestamped backups'},
+      {id:'history', x:150,y:450, w:170,h:48, layer:'data',     label:'Trade History',       sub:'Append-only CSV'},
+      {id:'feedback',x:390,y:450, w:170,h:48, layer:'data',     label:'Strategy Feedback',   sub:'Per-trigger win rates'},
+      {id:'logs',    x:630,y:450, w:170,h:48, layer:'data',     label:'Session Logs',        sub:'One per scheduled run'},
+    ],
+    edges:[
+      {from:'cron',    to:'runner',  type:'control'},
+      {from:'runner',  to:'claude',  type:'control'},
+      {from:'config',  to:'claude',  type:'data'},
+      {from:'claude',  to:'mcp',     type:'external'},
+      {from:'dash',    to:'config',  type:'control'},
+      {from:'claude',  to:'history', type:'data'},
+      {from:'claude',  to:'feedback',type:'data'},
+      {from:'runner',  to:'logs',    type:'data'},
+      {from:'history', to:'dash',    type:'data'},
+      {from:'feedback',to:'dash',    type:'data'},
+      {from:'logs',    to:'dash',    type:'data'},
+    ],
+  },
+
+  waytale: {
+    title: 'WayTale - GPS Landmark Audio Tour Pipeline',
+    nodes: [
+      {id:'sources', x:100,y:30,  w:160,h:54, layer:'external', label:'Public Sources',      sub:'Wikipedia/Wikidata\nfacts + metadata'},
+      {id:'draft',   x:390,y:30,  w:165,h:54, layer:'model',    label:'LLM Drafting',        sub:'Claude - facts only\n4 script variants, fact_type tag'},
+      {id:'tts',     x:660,y:30,  w:150,h:48, layer:'external', label:'TTS Synthesis',       sub:'Tiered quality'},
+      {id:'cache',   x:390,y:135, w:175,h:48, layer:'data',     label:'Content Cache',       sub:'status: pending'},
+      {id:'admin',   x:390,y:225, w:175,h:48, layer:'control',  label:'Admin Dashboard',     sub:'Approve / Publish / Reject'},
+      {id:'api',     x:390,y:330, w:175,h:54, layer:'control',  label:'Express Backend',     sub:'/landmarks/nearby\n/route/score, /:id/content'},
+      {id:'postgis', x:150,y:445, w:165,h:48, layer:'data',     label:'PostgreSQL/PostGIS',  sub:'Spatial index, published only'},
+      {id:'app',     x:390,y:445, w:165,h:54, layer:'frontend', label:'Expo App',            sub:'Map/Route/Tour screens'},
+      {id:'geo',     x:630,y:445, w:165,h:48, layer:'runtime',  label:'GPS + Geofence',      sub:'250m radius trigger'},
+    ],
+    edges:[
+      {from:'sources',to:'draft',  type:'external'},
+      {from:'draft',  to:'tts',    type:'model'},
+      {from:'draft',  to:'cache',  type:'data'},
+      {from:'tts',    to:'cache',  type:'data'},
+      {from:'cache',  to:'admin',  type:'control'},
+      {from:'admin',  to:'api',    type:'control'},
+      {from:'api',    to:'postgis',type:'data'},
+      {from:'api',    to:'app',    type:'data'},
+      {from:'app',    to:'geo',    type:'runtime'},
+      {from:'geo',    to:'app',    type:'runtime'},
+    ],
+  },
+
 };
 
 // ── SYSTEMS THINKING DIAGRAMS ──────────────────────────────────
@@ -5321,7 +5380,7 @@ function archShowPanel(containerId, archKey) {
 }
 
 // ── CAROUSEL ─────────────────────────────────────────────────
-const CAR_KEYS   = ['aurum','optima','slmforge','quant','safetyeye','sitaware','aetheros','supplychain','sovereigngrid'];
+const CAR_KEYS   = ['aurum','optima','slmforge','quant','safetyeye','sitaware','aetheros','supplychain','sovereigngrid','clawstreet','waytale'];
 const CAR_LABELS = [
   'AurumAI - Enterprise AI Control Plane',
   'OptimaLLM - AI Cost Optimisation Proxy',
@@ -5332,6 +5391,8 @@ const CAR_LABELS = [
   'AetherOS - AI-Native Microkernel OS',
   'Supply Chain Intel - Analytics Platform',
   'SovereignGrid - Decentralized P2P AI Compute Grid',
+  'ClawStreet - Agentic Trading via Claude Code',
+  'WayTale - GPS Landmark Audio Tour Pipeline',
 ];
 let carCurrent = 0;
 let carAutoTimer = null;
