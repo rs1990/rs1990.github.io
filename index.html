@@ -1919,7 +1919,7 @@ nav > .nav-links {
         <li>Local fine-tuning workbench for 135M-7B models (Python)</li>
         <li>Hardware-tier classification probes actual RAM/VRAM - refuses jobs that won't fit, no silent OOM</li>
         <li>MLX-LM primary on Apple Silicon, CUDA via accelerate launch, CPU fallback</li>
-        <li>27 RAM-tagged models, 6 export formats (GGUF/MLX/CoreML/ONNX/TFLite/Ollama), 101 unit tests</li>
+        <li>30 RAM-tagged models, 6 export formats (GGUF/MLX/CoreML/ONNX/TFLite/Ollama), 101 unit tests</li>
       </ul></div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
         <span class="tag">Python</span><span class="tag">MLX-LM</span><span class="tag">PyTorch/TRL</span><span class="tag">LoRA/QLoRA/DoRA</span><span class="tag">Gradio</span>
@@ -1938,12 +1938,12 @@ nav > .nav-links {
         <li>Production Bloomberg alternative - 282 features across 30 tabs</li>
         <li>Real-time charting (35+ indicators in Web Worker), multi-LLM streaming (Claude 3.5/Gemini 2.0/GPT-4)</li>
         <li>3,000-path Monte Carlo optimizer; institutional data (13-F/Form 4/Congress trades/dark pool)</li>
-        <li>5-guard self-learning trading bot + SHA-256 hash-linked audit chain; 310/310 tests, 0 TS errors</li>
+        <li>5-guard self-learning trading bot + SHA-256 hash-linked audit chain; 335/335 tests, 0 TS errors</li>
       </ul></div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
         <span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Multi-LLM</span><span class="tag">Redis/Celery</span>
       </div>
-      <div class="project-metric">310/310 tests - 0 TS errors - 282 features / 30 tabs - deployed Vercel/Render/Supabase</div>
+      <div class="project-metric">335/335 tests - 0 TS errors - 282 features / 30 tabs - deployed Vercel/Render/Supabase</div>
       <a href="https://github.com/rs1990/quanttradeai" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/quanttradeai</a>
       <div class="proj-cta">View Case Study &#x2192;</div>
     </div>
@@ -3822,7 +3822,7 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
         {title:'Supermemory - Bounded Design', body:'3 distinct memory types (outcome, decision, contextual snapshot). Bounded at 100 records per team/task-type, 90-day retention - prevents unbounded growth while capturing learning signals.'},
         {title:'No Autonomous Agents by Design', body:'All tasks are explicit, deterministic, user-triggered. Auditability over capability. Every invocation is traceable from input to signed output.'},
       ]},
-      {label:'Current Status', content:`<p>Actively developed. The core platform - API, task graph engine, structured model pipeline, policy enforcement, audit signing, knowledge graph, supermemory, cost accounting, and trust signals - is fully shipped and operational at MVP+1 stage. A focused security hardening sprint is underway to bring tenant isolation, auth flows, and production secrets management to release standard. Architecture and design are stable. Reach out for a walkthrough or to discuss production deployment requirements.</p>`}
+      {label:'Current Status', content:`<p>Actively developed. The core platform - API, task graph engine, structured model pipeline, policy enforcement, audit signing, knowledge graph, supermemory, cost accounting, and trust signals - is fully shipped and operational at MVP+1 stage. A security hardening sprint completed in July: tenant isolation, admin role checks, production secrets validation, and webhook request-forgery protection are now enforced. One item remains open (API key rotation). Architecture and design are stable. Reach out for a walkthrough or to discuss production deployment requirements.</p>`}
     ],
     tags:['Python','TypeScript','REST API','Relational DB','Cache','Structured Models','LLM','HMAC Audit Chain','Policy Engine','Background Jobs','ORM']
   },
@@ -3831,7 +3831,7 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
     eyebrow: 'Go - Local Reverse Proxy - Token Optimisation',
     title: 'OptimaLLM',
     tagline: 'Local reverse proxy intercepting AI coding assistant requests before they reach the model API. Applies a 13-step automatic optimisation pipeline: intent classification, model tier routing, context pruning, text deduplication, tool-result compression, image stripping, command-result caching, and knowledge-graph context injection. Measured 67% token reduction on a real 635-request session. Zero workflow changes required.',
-    meta: [{label:'Language',val:'Go (core) + Python (optional indexing)'},{label:'Stack',val:'Go - Embedded graph DB - In-memory LRU cache - 3D graph visualisation'},{label:'Role',val:'End-to-end Architecture and Build'},{label:'Status',val:'Prototype/MVP - correctness bugs under active resolution'}],
+    meta: [{label:'Language',val:'Go (core) + Python (optional indexing)'},{label:'Stack',val:'Go - Embedded graph DB - In-memory LRU cache - 3D graph visualisation'},{label:'Role',val:'End-to-end Architecture and Build'},{label:'Status',val:'MVP - core streaming/agentic bugs resolved, memory-growth hardening ongoing'}],
     metrics: [{num:'67%',lbl:'Measured token reduction (635 requests, one real session)'},{num:'13',lbl:'Optimisation steps applied per request in the pipeline'},{num:'15-90%',lbl:'Workload-dependent range across different usage patterns'},{num:'<200ms',lbl:'Transform pipeline overhead; stream tee adds <50ms'}],
     sections: [
       {label:'What It Does', content:`<p>A Go daemon running locally. The AI coding tool is pointed at the proxy via a single environment variable - every request is intercepted, optimised through 13 steps, and forwarded. The proxy is streaming-aware and builds a persistent local knowledge graph of indexed code on disk. All data stays on the local machine.</p>`},
@@ -3861,7 +3861,7 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
         {title:'Starvation Detection + Deferred Escalation', body:'12 starvation phrases detected post-response. On next turn, auto-escalates model tier without disrupting the current response stream. Measured 2 auto-escalation events in the 635-request session.'},
         {title:'Command Result Caching', body:'Hash-keyed command cache (2h TTL). Excludes non-deterministic commands. Deterministic commands replay from cache - bypass model API entirely.'},
       ]},
-      {label:'Current Status', content:`<p>Actively developed. Core optimisation pipeline, knowledge graph, memory management, and model routing are all functional and unit-tested. Three bugs affecting streaming fidelity and agentic loop compatibility have been identified, root-caused, and are being resolved in the current sprint. The 67% token reduction metric was measured on a real working session and is reproducible. Reach out for a technical walkthrough or to discuss integration into your workflow.</p>`}
+      {label:'Current Status', content:`<p>Actively developed. Core optimisation pipeline, knowledge graph, memory management, and model routing are all functional and unit-tested. Three bugs that previously affected streaming fidelity and agentic loop compatibility have been fixed and locked in with regression tests. Remaining work: bounding unbounded in-memory cache growth for long-running sessions. The 67% token reduction metric was measured on a real working session and is reproducible. Reach out for a technical walkthrough or to discuss integration into your workflow.</p>`}
     ],
     tags:['Go','Embedded Graph DB','In-memory LRU','Intent Classification','Model Tier Routing','4-Tier Memory','Knowledge Graph','Hybrid Ranking','Local-only']
   },
@@ -3871,7 +3871,7 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
     title: 'SLM Forge',
     tagline: 'Local fine-tuning workbench for small language models (135M-7B parameters). Takes raw data, trains adapter-based fine-tunes on available hardware, quantizes, then exports to multiple edge formats in a single UI. One app replaces a typical multi-tool fine-tuning pipeline. Hardware-tier classification probes actual RAM/VRAM and refuses jobs that won\'t fit - no silent OOM.',
     meta: [{label:'Language',val:'Python 3.10+'},{label:'Stack',val:'UI framework - Platform-native training engine - Adapter training - Multi-format export'},{label:'Role',val:'Product and System Design, End-to-End Build'},{label:'Status',val:'Production-ready on Apple Silicon; GPU path beta'}],
-    metrics: [{num:'27',lbl:'Curated edge models in catalog (39M-7B, RAM-tagged, weekly auto-refresh)'},{num:'6',lbl:'Export formats targeting different edge runtimes and platforms'},{num:'5',lbl:'Adapter variants supported for different training objectives'},{num:'101',lbl:'Unit tests passing; GPU end-to-end validator on every push'}],
+    metrics: [{num:'30',lbl:'Curated edge models in catalog (39M-7B, RAM-tagged, weekly auto-refresh)'},{num:'6',lbl:'Export formats targeting different edge runtimes and platforms'},{num:'5',lbl:'Adapter variants supported for different training objectives'},{num:'101',lbl:'Unit tests passing; GPU end-to-end validator on every push'}],
     sections: [
       {label:'What It Does', content:`<p>A hardware-aware, single-machine fine-tuning pipeline. Probes actual RAM/VRAM at startup, maps to hardware tier, refuses jobs that won\'t fit (prevents silent out-of-memory failures), then runs training via the optimal backend for the detected hardware. Live training metrics (loss, memory, tokens/sec) stream from the training subprocess to the UI in real time.</p><p>A curated catalog of 27 edge-friendly models - each tagged with RAM requirements for training and inference - auto-refreshes weekly. Reach out to discuss specific use cases.</p>`},
       {label:'Architecture', arch:`<span class="node">UI (12 tabs, per-session unlock, hardware probe banner)</span>
@@ -3889,14 +3889,14 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
   <span class="leaf">Resilience --- pre-flight RAM/disk checks, atomic writes, OOM auto-shrink</span>
   <span class="leaf">Session auth --- per-session unlock for server mode</span>
 
-<span class="node">Model catalog:</span> 27 curated models with train/inference RAM budgets</span>`},
+<span class="node">Model catalog:</span> 30 curated models with train/inference RAM budgets</span>`},
       {label:'Key Design Decisions', decisions:[
         {title:'Hardware-Tier Classification (refuses unfit jobs)', body:'System probes actual RAM/VRAM at startup, maps to coarse tier. Training refuses jobs tagged above available RAM before starting - no silent OOM mid-run, no half-trained checkpoints wasted.'},
         {title:'Multi-Format Export from One Adapter', body:'Same adapter output exports to 6 binary targets for different runtimes and platforms. Isolated virtual environments per exporter prevent dependency conflicts between export toolchains.'},
         {title:'Subprocess Event Streaming', body:'Training loss/memory/tokens-per-sec parsed from subprocess stdout via regex into a queue. UI displays live metrics without polling - zero coupling between training process and UI thread.'},
         {title:'Modality Auto-Detection', body:'Supports text, code, vision, and time-series modalities. Keyword heuristic scoring with an optional LLM fallback for ambiguous datasets. Returns modality type plus suggested column mapping.'},
       ]},
-      {label:'Current Status', content:`<p>Production-ready on Apple Silicon - the primary training path is fully battle-tested with 101 unit tests passing and all security audit findings resolved. GPU training support is in active beta: CPU-mode is validated in CI on every push, with live GPU end-to-end testing in progress pending dedicated hardware. Multi-format export (6 targets), hardware-tier classification, and the model catalog are all stable. Reach out for a demo or to discuss edge deployment requirements.</p>`}
+      {label:'Current Status', content:`<p>Production-ready on Apple Silicon - the primary training path is fully battle-tested with 101 unit tests passing and all security audit findings resolved. A new fuse-and-export path now lets quantization, multi-format export, and chat inference run fully off Apple Silicon - closing the previous Mac-only gap for those stages. GPU training itself remains in active beta: CPU-mode is validated in CI on every push, with live GPU end-to-end testing in progress pending dedicated hardware. Multi-format export (6 targets), hardware-tier classification, and the model catalog are all stable. Reach out for a demo or to discuss edge deployment requirements.</p>`}
     ],
     tags:['Python','Platform-native Training','GPU Training','Adapter Fine-tuning (LoRA/QLoRA/DoRA)','Knowledge Distillation','Multi-format Export','Edge Deployment','Local-only','101 Unit Tests']
   },
@@ -3905,8 +3905,8 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
     eyebrow: 'Financial Terminal - Multi-LLM - Production',
     title: 'QuantTradeAI',
     tagline: 'Production-grade financial analytics platform combining real-time charting (35+ technical indicators), multi-provider streaming AI research, portfolio optimization (Monte Carlo simulation, efficient frontier), institutional intelligence (regulatory filings, insider trades, legislative disclosures, alternative data), a self-learning paper trading bot with multiple safety guards, and a cryptographically signed audit chain.',
-    meta: [{label:'Language',val:'Python (backend) + TypeScript (frontend)'},{label:'Stack',val:'REST API - Relational DB + Auth - Cache - Frontend framework - Background workers'},{label:'Role',val:'Full product lifecycle - architecture to deployment'},{label:'Status',val:'Production-ready MVP - 310/310 tests - 0 type errors - deployed'}],
-    metrics: [{num:'282',lbl:'Features across 30 tabs in the terminal'},{num:'35+',lbl:'Technical indicators offloaded to a background thread for zero UI jank'},{num:'3,000',lbl:'Monte Carlo simulations for portfolio optimizer (efficient frontier)'},{num:'310',lbl:'Backend tests passing; 0 type errors; live deployment'}],
+    meta: [{label:'Language',val:'Python (backend) + TypeScript (frontend)'},{label:'Stack',val:'REST API - Relational DB + Auth - Cache - Frontend framework - Background workers'},{label:'Role',val:'Full product lifecycle - architecture to deployment'},{label:'Status',val:'Production-ready MVP - 335/335 tests - 0 type errors - deployed'}],
+    metrics: [{num:'282',lbl:'Features across 30 tabs in the terminal'},{num:'35+',lbl:'Technical indicators offloaded to a background thread for zero UI jank'},{num:'3,000',lbl:'Monte Carlo simulations for portfolio optimizer (efficient frontier)'},{num:'335',lbl:'Backend tests passing; 0 type errors; live deployment'}],
     sections: [
       {label:'What It Does', content:`<p>A production financial terminal with 282 features across 30 tabs. Real-time charts with 35+ technical indicators run in a background worker thread to prevent UI jank. A custom indicator scripting editor lets users write and run their own indicators. Options analytics include volatility surfaces, Greeks, and multi-leg strategy payoff diagrams. A 805-symbol screener with quantitative scoring. AI research reports stream token-by-token from multiple model providers. Portfolio optimization uses Monte Carlo simulation across thousands of paths.</p><p>Institutional-grade data includes regulatory filings, insider trading disclosures, legislative trade disclosures, short interest, and alternative data feeds - all from public sources. Reach out for a full feature walkthrough.</p>`},
       {label:'Architecture', arch:`<span class="node">Tier 1 - Frontend:</span>
@@ -3938,7 +3938,7 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
         {title:'Background Worker Indicator Engine', body:'All 35+ technical indicator calculations offloaded to a worker thread via a remote procedure call interface. Zero UI jank on 50k candles. Cross-tab broadcast syncs symbol/period/interval across browser tabs natively.'},
         {title:'Multi-LLM with Streaming + Bring-Your-Own Key', body:'Primary model provider with two fallback providers. All streaming token-by-token. Bring-your-own API key option bypasses rate limits. AI output registry with version tracking.'},
       ]},
-      {label:'Current Status', content:`<p>Production-ready and live. 310/310 backend tests passing with zero type errors across the full TypeScript codebase. The platform is deployed and operational. Pre-launch commercialisation steps are in progress - payment processing, data licensing, and legal terms are being finalised. The trading bot follows a mandatory paper-proving protocol before any live capital authorization, by design. Reach out for a full product demo or to discuss institutional data access and API integration.</p>`}
+      {label:'Current Status', content:`<p>Production-ready and live. 335/335 backend tests passing with zero type errors across the full TypeScript codebase. The platform is deployed and operational. A public, cryptographically verifiable AI-call ledger now ships with independent timestamp-authority attestation, so third parties can verify the record without trusting the app's own server. A live-order routing gap found during hardening has been closed - live orders now require authentication and cannot bypass the paper-proving gate. Pre-launch commercialisation steps are in progress - payment processing, data licensing, and legal terms are being finalised. The trading bot follows a mandatory paper-proving protocol before any live capital authorization, by design. Reach out for a full product demo or to discuss institutional data access and API integration.</p>`}
     ],
     tags:['Python','TypeScript','REST API','Relational DB','Cache','Background Workers','Multi-LLM Streaming','SHA-256 Audit Chain','Monte Carlo Optimizer','WebGL Charts','Worker Thread Indicators']
   },
@@ -3947,7 +3947,7 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
     eyebrow: 'Computer Vision - Manufacturing Safety - Enterprise',
     title: 'SafetyEye',
     tagline: 'Enterprise real-time computer vision safety monitoring for 100+ concurrent camera feeds in heavy manufacturing. Edge GPU workers ingest streams, run object detection + tracking, evaluate configurable safety rules, extract evidence clips from a rolling buffer, route to an AI model for failure analysis, and publish to a compliance dashboard with automated regulatory form generation.',
-    meta: [{label:'Language',val:'Python (backend/worker) + TypeScript (frontend)'},{label:'Stack',val:'GPU inference - Object tracking - Time-series DB - Geospatial DB - Streaming events - Frontend framework'},{label:'Role',val:'Full-stack Architecture and Build'},{label:'Status',val:'Prototype/MVP - feature-complete - correctness hardening needed before safety-critical use'}],
+    meta: [{label:'Language',val:'Python (backend/worker) + TypeScript (frontend)'},{label:'Stack',val:'GPU inference - Object tracking - Time-series DB - Geospatial DB - Streaming events - Frontend framework'},{label:'Role',val:'Full-stack Architecture and Build'},{label:'Status',val:'Prototype/MVP - feature-complete - core correctness bugs fixed, credential + isolation hardening remaining'}],
     metrics: [{num:'100+',lbl:'Concurrent camera feeds at HD resolution, 15 fps inference'},{num:'1,500',lbl:'fps cluster throughput across 3-4 high-end GPUs'},{num:'<=10s',lbl:'Alert latency target (typical 1-3s with edge inference)'},{num:'<500ms',lbl:'Clip extraction via stream copy (no re-encode)'}],
     sections: [
       {label:'What It Does', content:`<p>Edge GPU workers decode video streams, run quantized object detection + tracking at 15 fps, evaluate configurable rules (zone containment, PPE presence, dwell timers, proximity distances), extract evidence clips from a 60-second rolling buffer without re-encoding, optionally classify failure mode via a vision AI model or local small model, and publish to the control plane with a durable store-and-forward mechanism for resilience.</p><p>Regulatory compliance automation: auto-maps violations to standards, exports required forms, computes injury rate metrics, and supports electronic submission. Composite risk scoring with 7-day forecasting. Ergonomic posture scoring from skeleton detections. 9-system integration hub. Reach out for a technical discussion.</p>`},
@@ -3983,7 +3983,7 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
         {title:'Cryptographic Chain-of-Custody Signing', body:'Evidence clips signed at extraction time. Server verifies on ingest. Creates auditable legal evidence trail - proof that clip was not tampered with after capture.'},
         {title:'Durable Store-and-Forward + Server-Side Idempotency', body:'Worker writes violations to local WAL before HTTP POST. Server deduplicates on event ID. Survives worker network outages with at-least-once delivery and zero duplicate records.'},
       ]},
-      {label:'Current Status', content:`<p>Feature-complete prototype with a comprehensive architecture spanning edge inference, compliance automation, and a full management dashboard. A structured hardening sprint is underway addressing correctness and security items across the inference pipeline and API layer before deployment in a safety-critical environment. The architecture, data model, and integration framework are stable and extensible. Reach out to discuss the hardening roadmap, deployment requirements, or integration with your existing EHS infrastructure.</p>`}
+      {label:'Current Status', content:`<p>Feature-complete prototype with a comprehensive architecture spanning edge inference, compliance automation, and a full management dashboard. A hardening pass resolved the core correctness bugs in the inference pipeline (timestamp handling, per-camera tracking isolation, stream reconnect, GPU fallback) and closed unauthenticated WebSocket and CORS gaps. Tenant isolation is enforced at the application level; migrating it to database-level row security, and replacing hardcoded default credentials, remain open before deployment in a safety-critical environment. The architecture, data model, and integration framework are stable and extensible. Reach out to discuss the hardening roadmap, deployment requirements, or integration with your existing EHS infrastructure.</p>`}
     ],
     tags:['Python','TypeScript','GPU Inference','Object Detection','Multi-object Tracking','Time-series DB','Geospatial DB','Streaming Events','Vision AI','Cryptographic Signing','Durable Outbox','Compliance Automation']
   },
