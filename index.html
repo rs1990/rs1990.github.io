@@ -1857,13 +1857,13 @@ nav > .nav-links {
   <div class="section-label">Projects &amp; Repositories</div>
   <h2>What I build</h2>
   <p style="color:var(--text-muted);font-size:15px;max-width:600px;margin-bottom:48px;margin-top:-36px">
-    8 shipped repositories spanning AI platforms, safety systems, financial intelligence, and systems research.
+    11 shipped repositories spanning AI platforms, safety systems, financial intelligence, and systems research.
     Click any card for the full case study.
   </p>
 
   <!-- PROJECT CATEGORY TABS -->
   <div class="proj-filter-row">
-    <button class="proj-filter-btn active" onclick="filterProjects('all',this)">All (8)</button>
+    <button class="proj-filter-btn active" onclick="filterProjects('all',this)">All (11)</button>
     <button class="proj-filter-btn" onclick="filterProjects('ai',this)">AI Platforms</button>
     <button class="proj-filter-btn" onclick="filterProjects('systems',this)">Systems</button>
     <button class="proj-filter-btn" onclick="filterProjects('fintech',this)">Fintech</button>
@@ -2040,6 +2040,44 @@ nav > .nav-links {
       </div>
       <div class="project-metric">Federated GPU pool - EIP-191 wallet auth - hourly PL/pgSQL settlement - 3-layer fault tolerance</div>
       <a href="https://github.com/rs1990/SovereignGrid" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/SovereignGrid</a>
+      <div class="proj-cta">View Case Study &#x2192;</div>
+    </div>
+
+    <!-- 10. ClawStreet -->
+    <div class="project-card reveal" data-cat="fintech" onclick="openCase('clawstreet')">
+      <div class="project-icon">&#x1F99E;</div>
+      <div class="proj-category">Fintech &middot; Agentic Trading &middot; Claude Code</div>
+      <div class="project-title">ClawStreet</div>
+      <div class="project-desc"><ul>
+        <li>Intraday mean-reversion strategy driven entirely by Claude Code via a brokerage MCP server - no compiled trading engine</li>
+        <li>Strategy config, session prompts, and cron runner; every decision logged to trade history and a strategy feedback log</li>
+        <li>Phase-gated: signal validation (no orders) by default, manual promotion to live trading only after logged data supports it</li>
+        <li>Localhost dashboard with bounds-checked, tighten-only parameter API and timestamped strategy backups</li>
+      </ul></div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+        <span class="tag">Python</span><span class="tag">Claude Code</span><span class="tag">MCP</span><span class="tag">Cron</span><span class="tag">Bollinger/RSI/ATR</span>
+      </div>
+      <div class="project-metric">Signal-validation phase by default - hard EOD flatten - tighten-only risk API - private repo</div>
+      <span class="project-link" style="opacity:0.5;cursor:default" onclick="event.stopPropagation()">&#x1F512; private repository</span>
+      <div class="proj-cta">View Case Study &#x2192;</div>
+    </div>
+
+    <!-- 11. WayTale -->
+    <div class="project-card reveal" data-cat="ai" onclick="openCase('waytale')">
+      <div class="project-icon">&#x1F5FA;</div>
+      <div class="proj-category">Mobile &middot; AI Content Pipeline &middot; Location-Aware</div>
+      <div class="project-title">WayTale</div>
+      <div class="project-desc"><ul>
+        <li>GPS-based landmark audio tour app - React Native (Expo) frontend, Node.js/Express + PostGIS backend</li>
+        <li>Offline content pipeline: Wikipedia/Wikidata facts -&gt; Claude drafts sourced narration -&gt; TTS synthesis, admin-reviewed before publish</li>
+        <li>Live geofence triggers (250m radius) play narration automatically; every fact links back to its source</li>
+        <li>Route scoring blends travel time, landmark count, and a crowd heuristic across 2-3 candidate routes</li>
+      </ul></div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+        <span class="tag">React Native (Expo)</span><span class="tag">Node.js/Express</span><span class="tag">PostgreSQL/PostGIS</span><span class="tag">Claude</span><span class="tag">TTS</span>
+      </div>
+      <div class="project-metric">250m geofence triggers - sourced/cited narration - admin-reviewed content pipeline</div>
+      <a href="https://github.com/rs1990/waytale" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/waytale</a>
       <div class="proj-cta">View Case Study &#x2192;</div>
     </div>
 
@@ -4174,6 +4212,74 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
       {label:'Current Status', content:`<p>Deployed MVP with the core data pipeline, KPI engine, anomaly detection, demand forecasting, and dashboard all operational. Ongoing development is focused on test coverage, completing the remaining connector endpoints, wiring the alerting notification layer, and adding API authentication. The connector framework, metrics engine, and statistical models are stable and extensible. Reach out to discuss enterprise integration, connector development for your data sources, or deployment requirements.</p>`}
     ],
     tags:['Python','TypeScript','REST API','ORM','Background Scheduler','Statistical ML','Blended Forecasting','Z-score Anomaly Detection','ERP OData v4','Abstract Connector Pattern','Deployed']
+  },
+
+  clawstreet: {
+    eyebrow: 'Fintech - Agentic Trading - Claude Code',
+    title: 'ClawStreet',
+    tagline: 'An intraday mean-reversion trading setup for a cash brokerage account, driven entirely by Claude Code and a brokerage MCP server. There is no trading engine to compile - the strategy is a config file, a set of scheduled session prompts, and a cron runner. Claude reads the config, calls the broker tools, and logs every decision.',
+    meta: [{label:'Language',val:'Python + shell'},{label:'Stack',val:'Claude Code - MCP broker integration - cron - stdlib-only local dashboard'},{label:'Role',val:'End-to-end Design and Build'},{label:'Status',val:'Phase 1 - signal validation, no live orders'}],
+    metrics: [{num:'3',lbl:'Entry conditions required together: Bollinger Band, volume, RSI divergence'},{num:'1.5x',lbl:'ATR(14)-scaled stop; take-profit at 2x stop distance'},{num:'3:40pm',lbl:'Hard flatten time ET - no overnight positions, ever'},{num:'5',lbl:'Max concurrent position slots, whole shares only'}],
+    sections: [
+      {label:'What It Does', content:`<p>A cron scheduler runs headless Claude Code sessions against a strategy config that is the single source of truth for entry/exit rules and risk parameters. Each session reads the config, calls broker tools over MCP (quotes, orders, portfolio), and appends results to an append-only trade history and a dated strategy feedback log.</p><p>Phase 1 (the default) logs qualifying signals and their would-be outcomes with no orders placed. Promotion to live trading is a manual edit to the config, made only after logged data supports it - the system never promotes itself.</p>`},
+      {label:'Architecture', arch:`<span class="node">Scheduling:</span>
+cron -&gt; session runner script -&gt; headless Claude Code (claude -p)
+  <span class="leaf">-&gt; reads strategy config (entry/exit rules, risk parameters, phase status)</span>
+  <span class="leaf">-&gt; brokerage MCP tools (quotes, orders, portfolio)</span>
+  <span class="leaf">-&gt; appends trade history (CSV) + strategy feedback log + session logs</span>
+
+<span class="node">Local Dashboard (stdlib-only, localhost):</span>
+  <span class="leaf">Renders trade history, per-trigger stats, session logs, live strategy config</span>
+  <span class="leaf">Parameter API - bounds-checked, tighten-only vs. config baselines</span>
+  <span class="leaf">Rules API - wholesale config replace, timestamped backup before every save</span>
+  <span class="leaf">Advisor queue - notes for an interactive parameter-review skill</span>
+
+<span class="node">Sessions:</span> scan -&gt; check-in -&gt; flatten -&gt; post-market analytics -&gt; smoketest
+<span class="node">Analytics session:</span> tracks per-trigger win rates, may tighten (never loosen) thresholds - every change logged`},
+      {label:'Key Design Decisions', decisions:[
+        {title:'Phase-Gated, Manual-Only Promotion', body:'Phase 1 (signal validation) is the default and logs would-be outcomes with no orders. Moving to live trading is a manual config edit made by the operator, never automatic - removes the failure mode of a system promoting itself on a lucky streak.'},
+        {title:'Tighten-Only Parameter API', body:'The dashboard can adjust risk parameters but every value is bounds-checked server-side and may only tighten the config baselines, never loosen them. A timestamped backup is written before every save.'},
+        {title:'Hard End-of-Day Flatten', body:'All positions are force-closed by a fixed time each session day regardless of signal state - no overnight exposure under any condition. Documented as the safety-critical check to verify independently.'},
+        {title:'Config as Source of Truth, Not Code', body:'Strategy rules live in one config file Claude reads each session, not scattered across code paths. Every parameter change is a diffable, backed-up edit to that file.'},
+      ]},
+      {label:'Current Status', content:`<p>Phase 1 (signal validation) is the default and current operating mode - no live orders placed. Session scheduling, broker MCP integration, trade/feedback logging, and the local dashboard (including the tighten-only parameter API) are built and functional. Private repository while signal data accumulates ahead of any live-trading decision.</p>`}
+    ],
+    tags:['Python','Claude Code','MCP','Cron','Agentic Trading','Bollinger Bands','RSI','ATR','Risk-Bounded Config','Local Dashboard']
+  },
+
+  waytale: {
+    eyebrow: 'Mobile - AI Content Pipeline - Location-Aware',
+    title: 'WayTale',
+    tagline: 'A GPS-based landmark audio tour app that narrates the history, geography, and culture of landmarks as users travel. Built on a pre-generated content pipeline - public sources feed an LLM drafting pass, then TTS synthesis - so runtime narration is fast, sourced, and admin-reviewed before it ever reaches a phone.',
+    meta: [{label:'Language',val:'JavaScript (React Native + Node.js)'},{label:'Stack',val:'Expo - Express - PostgreSQL/PostGIS - LLM drafting - TTS synthesis'},{label:'Role',val:'End-to-end Design and Build'},{label:'Status',val:'Phase 1 - core GPS/narration flow built'}],
+    metrics: [{num:'250m',lbl:'Geofence radius that triggers live narration playback'},{num:'2-3',lbl:'Route options scored by time + landmark count + crowd heuristic'},{num:'3-5min',lbl:'Deep-dive narration per landmark across history/geography/culture'},{num:'100%',lbl:'Facts source-linked to their originating reference'}],
+    sections: [
+      {label:'What It Does', content:`<p>An offline pipeline (admin-only) pulls landmark metadata and sourced facts from public reference APIs, drafts narration scripts with an LLM constrained to inject only fetched facts (never invent them), tags each script by fact type (verified/legend/mixed), and synthesizes audio via a TTS service. An admin reviews and publishes scripts before they are ever served.</p><p>At runtime, the mobile app tracks GPS position, scores 2-3 candidate routes, and triggers narration playback automatically via geofencing as the user enters a landmark's radius - the app only ever reads published, pre-generated content.</p>`},
+      {label:'Architecture', arch:`<span class="node">Phase 0 - Content Pipeline (admin-only, offline):</span>
+Public landmark/fact sources -&gt; LLM narration draft (facts-only, no invention)
+  <span class="leaf">-&gt; fact_type tagging (verified / legend / mixed), 4 script variants</span>
+  <span class="leaf">-&gt; TTS synthesis (tiered quality)</span>
+  <span class="leaf">-&gt; content cache (status: pending) -&gt; admin dashboard -&gt; approve/publish/reject</span>
+
+<span class="node">Runtime - Mobile App (Expo/React Native):</span>
+  <span class="leaf">MapScreen / RouteScreen / LandmarkDetailScreen / TourScreen</span>
+  <span class="leaf">GPS position -&gt; nearby landmark query -&gt; route scoring -&gt; geofence trigger</span>
+
+<span class="node">Runtime - Backend (Node.js/Express):</span>
+  <span class="leaf">GET /landmarks/nearby - PostGIS spatial query, published content only</span>
+  <span class="leaf">POST /route/score - time + landmark count + crowd heuristic</span>
+  <span class="leaf">GET /landmarks/:id/content - deep-dive narration + citations</span>
+
+<span class="node">Database:</span> PostgreSQL + PostGIS (spatial indexing for fast geofence queries)`},
+      {label:'Key Design Decisions', decisions:[
+        {title:'Pre-Generated Content, Not Live LLM Calls', body:'Narration is drafted and reviewed offline, then cached - the runtime app only ever serves published, pre-generated content. Keeps per-user latency and cost independent of LLM inference, and gives an admin a review gate before anything reaches a phone.'},
+        {title:'Facts-Only LLM Constraint', body:'The drafting pass is explicitly constrained to inject only facts retrieved from public reference sources, never to invent content. Every fact carries a source citation and a fact_type tag (verified/legend/mixed) so users can see provenance.'},
+        {title:'Geofence-Triggered Playback', body:'Narration plays automatically via a 250m geofence rather than requiring manual selection - the app reacts to where the user actually is, not a menu.'},
+        {title:'Admin Review Gate Before Publish', body:'Every generated script sits in a pending state until an admin approves it. Separates automated drafting from what ships, catching sourcing or tone issues before they reach a user.'},
+      ]},
+      {label:'Current Status', content:`<p>Phase 1 (current): real-time GPS tracking, nearby-landmark queries, route scoring, live geofence narration triggers, source citations, and legend tagging are built. Roadmap phases (offline downloads, personalization, subscription tiers, regional expansion) are not yet started.</p>`}
+    ],
+    tags:['React Native (Expo)','Node.js','Express','PostgreSQL','PostGIS','LLM Content Drafting','TTS Synthesis','Geofencing','Source Citations']
   }
 
 };
