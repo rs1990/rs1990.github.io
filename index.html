@@ -1857,13 +1857,13 @@ nav > .nav-links {
   <div class="section-label">Projects &amp; Repositories</div>
   <h2>What I build</h2>
   <p style="color:var(--text-muted);font-size:15px;max-width:600px;margin-bottom:48px;margin-top:-36px">
-    11 shipped repositories spanning AI platforms, safety systems, financial intelligence, and systems research.
+    13 shipped repositories spanning AI platforms, safety systems, financial intelligence, and systems research.
     Click any card for the full case study.
   </p>
 
   <!-- PROJECT CATEGORY TABS -->
   <div class="proj-filter-row">
-    <button class="proj-filter-btn active" onclick="filterProjects('all',this)">All (11)</button>
+    <button class="proj-filter-btn active" onclick="filterProjects('all',this)">All (13)</button>
     <button class="proj-filter-btn" onclick="filterProjects('ai',this)">AI Platforms</button>
     <button class="proj-filter-btn" onclick="filterProjects('systems',this)">Systems</button>
     <button class="proj-filter-btn" onclick="filterProjects('fintech',this)">Fintech</button>
@@ -2081,6 +2081,44 @@ nav > .nav-links {
       <div class="proj-cta">View Case Study &#x2192;</div>
     </div>
 
+    <!-- 12. Auric -->
+    <div class="project-card reveal" data-cat="ai" onclick="openCase('auric')">
+      <div class="project-icon">&#x1FA99;</div>
+      <div class="proj-category">AI Platforms &middot; Agent + Gateway &middot; Go</div>
+      <div class="project-title">Auric</div>
+      <div class="project-desc"><ul>
+        <li>Single Go binary merging a token-optimization pipeline with a policy/audit governance layer into one agent platform</li>
+        <li>Autonomous agent loop with sandboxed code execution and web fetch, plus a web chat UI and terminal REPL</li>
+        <li>Multi-provider LLM aggregation gateway behind one API endpoint - price/health routing, automatic failover, streaming translation, prepaid billing</li>
+        <li>Atomic escrow billing, concurrency-tested (100 racing debits, zero overdraw); hash-chained tamper-evident audit log</li>
+      </ul></div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+        <span class="tag">Go</span><span class="tag">Multi-Provider Gateway</span><span class="tag">Policy Engine</span><span class="tag">Audit Log</span><span class="tag">Prepaid Billing</span>
+      </div>
+      <div class="project-metric">49/49 tests passing - atomic billing, race-tested - deployed - private repo</div>
+      <span class="project-link" style="opacity:0.5;cursor:default" onclick="event.stopPropagation()">&#x1F512; private repository</span>
+      <div class="proj-cta">View Case Study &#x2192;</div>
+    </div>
+
+    <!-- 13. Intervue -->
+    <div class="project-card reveal" data-cat="ai" onclick="openCase('intervue')">
+      <div class="project-icon">&#x1F399;</div>
+      <div class="proj-category">AI Platforms &middot; Career Prep &middot; Next.js</div>
+      <div class="project-title">Intervue</div>
+      <div class="project-desc"><ul>
+        <li>Turns a job posting into a personalized ~100-question interview study guide, cross-referenced against real interview discussion from public, terms-compliant community APIs</li>
+        <li>Deliberately avoids sites that block automated access - treated as an authorization boundary, not just a scraping tradeoff</li>
+        <li>Model-routed answers: a fast model for resume-grounded behavioral responses, a stronger model with capped web search for technical/system-design claims</li>
+        <li>Mock mode by default (built-in question bank, no API key required); live mode degrades gracefully per data source</li>
+      </ul></div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+        <span class="tag">Next.js</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span><span class="tag">Claude</span><span class="tag">Model Routing</span>
+      </div>
+      <div class="project-metric">~100-question guide - model-routed cost/accuracy split - mock mode by default</div>
+      <a href="https://github.com/rs1990/intervue" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/intervue</a>
+      <div class="proj-cta">View Case Study &#x2192;</div>
+    </div>
+
   </div><!-- end projects-grid -->
 
   <!-- ARCHITECTURE CAROUSEL -->
@@ -2108,6 +2146,8 @@ nav > .nav-links {
         <div class="arch-carousel-slide" id="car-slide-8"></div>
         <div class="arch-carousel-slide" id="car-slide-9"></div>
         <div class="arch-carousel-slide" id="car-slide-10"></div>
+        <div class="arch-carousel-slide" id="car-slide-11"></div>
+        <div class="arch-carousel-slide" id="car-slide-12"></div>
       </div>
     </div>
     <div class="arch-carousel-nav">
@@ -2122,6 +2162,8 @@ nav > .nav-links {
       <button class="arch-carousel-dot" id="car-dot-8" onclick="carouselGo(8)"></button>
       <button class="arch-carousel-dot" id="car-dot-9" onclick="carouselGo(9)"></button>
       <button class="arch-carousel-dot" id="car-dot-10" onclick="carouselGo(10)"></button>
+      <button class="arch-carousel-dot" id="car-dot-11" onclick="carouselGo(11)"></button>
+      <button class="arch-carousel-dot" id="car-dot-12" onclick="carouselGo(12)"></button>
     </div>
     <div class="arch-carousel-label" id="car-label">AurumAI - Enterprise AI Control Plane</div>
   </div>
@@ -4284,6 +4326,76 @@ Public landmark/fact sources -&gt; LLM narration draft (facts-only, no invention
       {label:'Current Status', content:`<p>Phase 1 (current): real-time GPS tracking, nearby-landmark queries, route scoring, live geofence narration triggers, source citations, and legend tagging are built. Roadmap phases (offline downloads, personalization, subscription tiers, regional expansion) are not yet started.</p>`}
     ],
     tags:['React Native (Expo)','Node.js','Express','PostgreSQL','PostGIS','LLM Content Drafting','TTS Synthesis','Geofencing','Source Citations']
+  },
+
+  auric: {
+    eyebrow: 'AI Platforms - Agent Platform + Multi-Provider Gateway',
+    title: 'Auric',
+    tagline: 'A self-hosted AI agent platform in a single Go binary - a token-optimization pipeline and a policy/audit governance layer, previously two separate systems, merged into one product. On top sit an autonomous agent loop with sandboxed tool execution and a multi-provider aggregation gateway that puts one API endpoint in front of several LLM providers with price/health routing, failover, and prepaid billing.',
+    meta: [{label:'Language',val:'Go'},{label:'Stack',val:'Single binary - embedded KV store with optional SQL backend - policy engine - hash-chained audit log'},{label:'Role',val:'End-to-end Design and Build'},{label:'Status',val:'Actively developed, deployed'}],
+    metrics: [{num:'49',lbl:'Test functions passing across the codebase'},{num:'100',lbl:'Racing concurrent debits tested against the billing store - zero overdraw'},{num:'7',lbl:'LLM providers reachable behind one aggregation endpoint'},{num:'2',lbl:'Prior systems (optimization + governance) merged into one binary'}],
+    sections: [
+      {label:'What It Does', content:`<p>Auric combines a token-optimization pipeline (message deduplication, stale tool-result compression, semantic response caching, heuristic model routing) with a governance layer (policy-checked tool execution, a hash-chained tamper-evident audit log, per-session cost metering and budgets) inside one Go binary. On top of that core sit an autonomous agent loop with sandboxed code execution and web fetch, a web chat UI, and a terminal REPL.</p><p>A separate aggregation gateway exposes one OpenAI-compatible endpoint and one API key in front of several LLM providers, with price/health-based routing, automatic failover, streaming response translation, token metering, and prepaid billing so third-party clients can be metered and charged per call.</p>`},
+      {label:'Architecture', arch:`<span class="node">Entry Points:</span>
+Web chat UI / terminal REPL -&gt; CLI/serve entrypoint -&gt; Agent Loop
+  <span class="leaf">-&gt; sandboxed tool execution (code exec, web fetch)</span>
+
+<span class="node">Governance and Optimization (imported as internal packages):</span>
+  <span class="leaf">Policy Engine - tool whitelist, denied input patterns, iteration cap, budget</span>
+  <span class="leaf">Optimization Pipeline - dedup, tool-result compression, semantic cache, model routing</span>
+  <span class="leaf">Audit Log - HMAC hash chain, independently verifiable</span>
+
+<span class="node">Aggregation Gateway (separate product surface):</span>
+  <span class="leaf">Inbound OpenAI-compatible API + inbound native Claude API</span>
+  <span class="leaf">Price/health routing across configured providers, automatic failover</span>
+  <span class="leaf">Streaming response translation, per-call token metering</span>
+  <span class="leaf">Billing Store - atomic escrow debits, embedded by default, SQL backend for multi-node deployments</span>
+
+<span class="node">Observability:</span> structured request tracing - CI and a separate live-provider test workflow run on every change`},
+      {label:'Key Design Decisions', decisions:[
+        {title:'Real Merge, Not a Wrapper', body:'The optimization and governance packages were imported wholesale as internal Go packages rather than left as two services glued together over the network - the agent loop and aggregation gateway are new code built directly on top of both.'},
+        {title:'Atomic Escrow Billing', body:'The billing store uses atomic conditional debits rather than read-then-write balance updates, closing the classic double-spend/overdraw race in metered billing. Verified under 100 concurrent racing debits with zero overdraw.'},
+        {title:'Self-Documented Gaps Over Overclaiming', body:'The project keeps its own review and roadmap notes that explicitly flag what is unproven - live-traffic provider hardening, end-user OAuth billing, and provider-latency telemetry are called out as not yet done rather than glossed over.'},
+        {title:'Real Tokenizer Over a Heuristic Floor', body:'Replaced an approximate character-count billing floor with an actual tokenizer, tightening pre-flight cost estimates ahead of scaling usage rather than leaving the coarse heuristic in place.'},
+      ]},
+      {label:'Current Status', content:`<p>Deployed as a single running instance on a SQL-backed billing store (the live deployment moved off the embedded default). 49 test functions pass across the packages that have coverage; a handful of thin entrypoint/infrastructure packages have none yet. CI and a separate live-provider test workflow now run automatically on every change. Multi-node correctness, end-user OAuth billing, and live provider-latency telemetry remain open per the project's own review notes. Private repository - reach out to discuss access or integration.</p>`}
+    ],
+    tags:['Go','Multi-Provider Gateway','Policy Engine','Hash-Chained Audit Log','Atomic Billing','Agent Loop','Claude Code']
+  },
+
+  intervue: {
+    eyebrow: 'AI Platforms - Career Prep - Full-Stack Next.js',
+    title: 'Intervue',
+    tagline: 'Turns a job posting into a personalized interview study guide. Intervue pulls a job description apart to find the must-know technologies, cross-references real interview discussion pulled from public, terms-compliant community APIs, and uses an LLM to merge it all into a study plan that separates forum-verified questions from predicted ones.',
+    meta: [{label:'Language',val:'TypeScript (Next.js)'},{label:'Stack',val:'Next.js App Router - React - Tailwind CSS - Claude (model-routed) - resume parsing'},{label:'Role',val:'End-to-end Design and Build'},{label:'Status',val:'Active, local / mock-mode demo'}],
+    metrics: [{num:'~100',lbl:'Questions per generated study guide'},{num:'3',lbl:'Public community APIs cross-referenced for real discussion signal'},{num:'2',lbl:'Models used depending on question category - cost vs accuracy split'},{num:'0',lbl:'API keys required to run the default mock-mode demo'}],
+    sections: [
+      {label:'What It Does', content:`<p>Intervue parses a job posting to find the must-know technologies, cross-references real interview discussion from public, terms-compliant community APIs, and uses an LLM to merge that signal with the job description into a study plan - separating forum-verified questions from predicted ones. Every question has a "Get answer" action that returns a full answer, a concept explanation, an inline diagram for system-design questions, and a sources list only when the model actually searched.</p><p>The project deliberately avoids sites that block automated access - treated as an authorization boundary the site operator put there on purpose, not just a scraping-difficulty tradeoff, so only sources with public, terms-compliant APIs are used.</p>`},
+      {label:'Architecture', arch:`<span class="node">Input:</span>
+Job posting text + optional resume upload (PDF/Word)
+  <span class="leaf">-&gt; parsing layer extracts must-know technologies and resume facts</span>
+
+<span class="node">Signal Gathering:</span>
+  <span class="leaf">Public, terms-compliant community APIs -&gt; real interview discussion signal</span>
+  <span class="leaf">Mock mode (default, no API key) -&gt; built-in baseline question bank, no network calls</span>
+
+<span class="node">Synthesis:</span>
+  <span class="leaf">LLM merges forum signal + job description -&gt; ~100-question guide, verified vs. predicted tags</span>
+
+<span class="node">Per-Question Answers (model-routed):</span>
+  <span class="leaf">Behavioral -&gt; fast model, grounded in resume facts</span>
+  <span class="leaf">Technical / System Design -&gt; stronger model + capped web search, called only when not already confident</span>
+
+<span class="node">UI:</span> question bank - answer panel - inline diagram renderer - study scheduler - graceful per-source degradation in live mode`},
+      {label:'Key Design Decisions', decisions:[
+        {title:'Authorization Line, Not a Technical One', body:'The project only pulls from sources with public, terms-compliant APIs and will not scrape sites that actively block automated access - treated as an authorization boundary rather than just a harder scraping problem.'},
+        {title:'Cost-Matched Model Routing', body:'Resume-grounded behavioral answers carry low hallucination risk and route to a fast, cheap model. Technical and system-design answers, where factual claims actually matter, route to a stronger model with capped web search that is only invoked when the model is not already confident.'},
+        {title:'No Fabricated Citations', body:'The system prompt explicitly forbids inventing sources - if the model did not search, the sources section says so instead of fabricating a URL.'},
+        {title:'Mock Mode by Default', body:'The app runs fully offline with a built-in question bank and no API keys out of the box, so the demo works standalone. Live mode with real cross-referencing is additive, not required, and degrades gracefully per data source if a credential is missing.'},
+      ]},
+      {label:'Current Status', content:`<p>Core generation and answer flow - question synthesis, per-question answers, resume-grounded behavioral responses, capped web search for technical questions, inline diagram rendering, and PDF/Word resume upload - is built and working locally. No automated test suite yet. Live deployment is not yet confirmed; runs today as a local / mock-mode demo. Reach out to discuss deployment or extending the data-source integrations.</p>`}
+    ],
+    tags:['Next.js','React','TypeScript','Tailwind CSS','Claude','Model Routing','Resume Parsing']
   }
 
 };
@@ -4856,6 +4968,59 @@ const ARCH_DATA = {
     ],
   },
 
+  auric: {
+    title: 'Auric - Agent Platform + Multi-Provider Gateway',
+    nodes: [
+      {id:'ui',       x:100,y:30,  w:165,h:54, layer:'frontend', label:'Web Chat / REPL',     sub:'Sessions, live tool trace'},
+      {id:'entry',    x:390,y:30,  w:165,h:48, layer:'control',  label:'CLI / Serve Entry',   sub:'Single Go binary'},
+      {id:'agent',    x:390,y:120, w:170,h:54, layer:'model',    label:'Agent Loop',          sub:'Sandboxed code exec, web fetch'},
+      {id:'policy',   x:150,y:225, w:170,h:54, layer:'control',  label:'Policy Engine',       sub:'Tool whitelist, budget, iteration cap'},
+      {id:'gateway',  x:630,y:225, w:170,h:54, layer:'control',  label:'Aggregation Gateway', sub:'Price/health routing, failover'},
+      {id:'optimize', x:150,y:330, w:170,h:54, layer:'data',     label:'Optimization Pipeline',sub:'Dedup, compression, semantic cache'},
+      {id:'providers',x:630,y:330, w:170,h:48, layer:'external', label:'LLM Providers',       sub:'7, price/health-routed'},
+      {id:'audit',    x:390,y:445, w:170,h:48, layer:'data',     label:'Audit Log',           sub:'HMAC hash chain'},
+      {id:'billing',  x:630,y:445, w:170,h:48, layer:'data',     label:'Billing Store',       sub:'Atomic escrow debits'},
+    ],
+    edges:[
+      {from:'ui',      to:'entry',   type:'control'},
+      {from:'entry',   to:'agent',   type:'control'},
+      {from:'agent',   to:'policy',  type:'control'},
+      {from:'policy',  to:'optimize',type:'data'},
+      {from:'optimize',to:'agent',   type:'data'},
+      {from:'agent',   to:'audit',   type:'data'},
+      {from:'entry',   to:'gateway', type:'control'},
+      {from:'gateway', to:'providers',type:'external'},
+      {from:'gateway', to:'billing', type:'data'},
+      {from:'gateway', to:'audit',   type:'data'},
+    ],
+  },
+
+  intervue: {
+    title: 'Intervue - Job Posting to Interview Study Guide',
+    nodes: [
+      {id:'jobpost', x:100,y:30,  w:160,h:48, layer:'external', label:'Job Posting',         sub:'Pasted text input'},
+      {id:'resume',  x:390,y:30,  w:160,h:48, layer:'external', label:'Resume Upload',       sub:'PDF / Word, optional'},
+      {id:'sources', x:660,y:30,  w:160,h:54, layer:'external', label:'Community APIs',      sub:'Public, terms-compliant'},
+      {id:'parse',   x:245,y:135, w:180,h:48, layer:'control',  label:'Parsing Layer',       sub:'Tech extraction + resume facts'},
+      {id:'synth',   x:390,y:230, w:190,h:54, layer:'model',    label:'LLM Synthesis',       sub:'Model-routed, verified vs. predicted'},
+      {id:'bank',    x:150,y:335, w:175,h:48, layer:'data',     label:'Question Bank',       sub:'~100 questions, mock or live'},
+      {id:'answer',  x:390,y:335, w:175,h:54, layer:'control',  label:'Answer API',          sub:'Per-question, model-routed'},
+      {id:'mockmode',x:150,y:445, w:175,h:48, layer:'data',     label:'Mock Mode',           sub:'Offline baseline, no network'},
+      {id:'studyui', x:390,y:445, w:175,h:54, layer:'frontend', label:'Study Guide UI',      sub:'Bank, answers, diagrams, scheduler'},
+    ],
+    edges:[
+      {from:'jobpost', to:'parse',   type:'external'},
+      {from:'resume',  to:'parse',   type:'external'},
+      {from:'sources', to:'synth',   type:'external'},
+      {from:'parse',   to:'synth',   type:'control'},
+      {from:'synth',   to:'bank',    type:'data'},
+      {from:'bank',    to:'mockmode',type:'data'},
+      {from:'bank',    to:'studyui', type:'data'},
+      {from:'studyui', to:'answer',  type:'control'},
+      {from:'answer',  to:'studyui', type:'data'},
+    ],
+  },
+
 };
 
 // ── SYSTEMS THINKING DIAGRAMS ──────────────────────────────────
@@ -5380,7 +5545,7 @@ function archShowPanel(containerId, archKey) {
 }
 
 // ── CAROUSEL ─────────────────────────────────────────────────
-const CAR_KEYS   = ['aurum','optima','slmforge','quant','safetyeye','sitaware','aetheros','supplychain','sovereigngrid','clawstreet','waytale'];
+const CAR_KEYS   = ['aurum','optima','slmforge','quant','safetyeye','sitaware','aetheros','supplychain','sovereigngrid','clawstreet','waytale','auric','intervue'];
 const CAR_LABELS = [
   'AurumAI - Enterprise AI Control Plane',
   'OptimaLLM - AI Cost Optimisation Proxy',
@@ -5393,6 +5558,8 @@ const CAR_LABELS = [
   'SovereignGrid - Decentralized P2P AI Compute Grid',
   'ClawStreet - Agentic Trading via Claude Code',
   'WayTale - GPS Landmark Audio Tour Pipeline',
+  'Auric - Agent Platform + Multi-Provider Gateway',
+  'Intervue - Job Posting to Interview Study Guide',
 ];
 let carCurrent = 0;
 let carAutoTimer = null;
