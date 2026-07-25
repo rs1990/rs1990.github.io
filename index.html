@@ -582,6 +582,16 @@ h2 { font-family: var(--font-display); font-size: clamp(30px,3.8vw,50px); font-w
 
 /* AI project card enhancements */
 .proj-category { font-family:var(--font-mono); font-size:9px; color:var(--cyan); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:8px; }
+.proj-actions { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px; }
+.proj-actions .proj-cta { margin-top:0; }
+.proj-site {
+  display:inline-flex; align-items:center; gap:6px; padding:7px 13px; border-radius:7px;
+  font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:0.04em;
+  color:var(--amber); background:rgba(245,158,11,0.07); border:1px solid rgba(245,158,11,0.32);
+  text-decoration:none; transition:background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.proj-site:hover { background:rgba(245,158,11,0.16); border-color:var(--amber); transform:translateY(-1px); }
+.cs-site-btn { display:inline-flex; align-items:center; gap:8px; }
 .proj-cta { display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-size:12px; font-weight:700; color:var(--amber); font-family:var(--font-mono); letter-spacing:0.04em; transition:gap 0.2s; }
 .project-card:hover .proj-cta { gap:10px; }
 #ai-projects-grid .project-card { cursor:pointer; }
@@ -1907,7 +1917,7 @@ nav > .nav-links {
       </div>
       <div class="project-metric">Measured 67% reduction (295K->98K) - 635-request session - Go 1.26 - BadgerDB</div>
       <a href="https://github.com/rs1990/OptimaLLM" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/OptimaLLM</a>
-      <div class="proj-cta">View Case Study &#x2192;</div>
+      <div class="proj-actions"><div class="proj-cta">View Case Study &#x2192;</div><a class="proj-site" href="https://optimallm.onrender.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="optimallm.onrender.com">&#x2197; Visit Site</a></div>
     </div>
 
     <!-- 3. SLM Forge -->
@@ -1926,7 +1936,7 @@ nav > .nav-links {
       </div>
       <div class="project-metric">6 export formats (GGUF/MLX/CoreML/ONNX/TFLite/Ollama) - 101 tests - Apple Silicon production-ready</div>
       <a href="https://github.com/rs1990/slm-forge" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/slm-forge</a>
-      <div class="proj-cta">View Case Study &#x2192;</div>
+      <div class="proj-actions"><div class="proj-cta">View Case Study &#x2192;</div><a class="proj-site" href="https://slm-forge.onrender.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="slm-forge.onrender.com">&#x2197; Visit Site</a></div>
     </div>
 
     <!-- 4. QuantTradeAI -->
@@ -1964,7 +1974,7 @@ nav > .nav-links {
       </div>
       <div class="project-metric">1,500 fps cluster throughput - <=10s alert latency - <500ms clip extraction - Ed25519 evidence chain</div>
       <a href="https://github.com/rs1990/SafetyEye" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/SafetyEye</a>
-      <div class="proj-cta">View Case Study &#x2192;</div>
+      <div class="proj-actions"><div class="proj-cta">View Case Study &#x2192;</div><a class="proj-site" href="https://safetyeye-frontend.onrender.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="safetyeye-frontend.onrender.com">&#x2197; Visit Site</a></div>
     </div>
 
     <!-- 6. SitAware -->
@@ -2021,7 +2031,7 @@ nav > .nav-links {
       </div>
       <div class="project-metric">13 KPIs daily - z-score anomaly detection (60d) - 14-day demand forecast - deployed on Render</div>
       <a href="https://github.com/rs1990/supply-chain-intel" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/supply-chain-intel</a>
-      <div class="proj-cta">View Case Study &#x2192;</div>
+      <div class="proj-actions"><div class="proj-cta">View Case Study &#x2192;</div><a class="proj-site" href="https://supplychainintel.onrender.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="supplychainintel.onrender.com">&#x2197; Visit Site</a></div>
     </div>
 
     <!-- 9. SovereignGrid -->
@@ -2040,7 +2050,7 @@ nav > .nav-links {
       </div>
       <div class="project-metric">Federated GPU pool - EIP-191 wallet auth - hourly PL/pgSQL settlement - 3-layer fault tolerance</div>
       <a href="https://github.com/rs1990/SovereignGrid" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/SovereignGrid</a>
-      <div class="proj-cta">View Case Study &#x2192;</div>
+      <div class="proj-actions"><div class="proj-cta">View Case Study &#x2192;</div><a class="proj-site" href="https://sovereigngrid.onrender.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="sovereigngrid.onrender.com">&#x2197; Visit Site</a></div>
     </div>
 
     <!-- 10. ClawStreet -->
@@ -2059,7 +2069,7 @@ nav > .nav-links {
       </div>
       <div class="project-metric">Signal-validation phase by default - hard EOD flatten - tighten-only risk API - private repo</div>
       <span class="project-link" style="opacity:0.5;cursor:default" onclick="event.stopPropagation()">&#x1F512; private repository</span>
-      <div class="proj-cta">View Case Study &#x2192;</div>
+      <div class="proj-actions"><div class="proj-cta">View Case Study &#x2192;</div><a class="proj-site" href="https://clawstreet.onrender.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="clawstreet.onrender.com">&#x2197; Visit Site</a></div>
     </div>
 
     <!-- 11. WayTale -->
@@ -2078,7 +2088,7 @@ nav > .nav-links {
       </div>
       <div class="project-metric">250m geofence triggers - sourced/cited narration - admin-reviewed content pipeline</div>
       <a href="https://github.com/rs1990/waytale" target="_blank" class="project-link" onclick="event.stopPropagation()">&#x2197; github.com/rs1990/waytale</a>
-      <div class="proj-cta">View Case Study &#x2192;</div>
+      <div class="proj-actions"><div class="proj-cta">View Case Study &#x2192;</div><a class="proj-site" href="https://waytale-iviq.onrender.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="waytale-iviq.onrender.com">&#x2197; Visit Site</a></div>
     </div>
 
     <!-- 12. Auric -->
@@ -2097,7 +2107,7 @@ nav > .nav-links {
       </div>
       <div class="project-metric">49/49 tests passing - atomic billing, race-tested - deployed - private repo</div>
       <span class="project-link" style="opacity:0.5;cursor:default" onclick="event.stopPropagation()">&#x1F512; private repository</span>
-      <div class="proj-cta">View Case Study &#x2192;</div>
+      <div class="proj-actions"><div class="proj-cta">View Case Study &#x2192;</div><a class="proj-site" href="https://auric-iai4.onrender.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="auric-iai4.onrender.com">&#x2197; Visit Site</a></div>
     </div>
 
     <!-- 13. Intervue -->
@@ -3912,6 +3922,8 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
   },
 
   optima: {
+    site: 'https://optimallm.onrender.com',
+    siteLabel: 'optimallm.onrender.com',
     eyebrow: 'Go - Local Reverse Proxy - Token Optimisation',
     title: 'OptimaLLM',
     tagline: 'Local reverse proxy intercepting AI coding assistant requests before they reach the model API. Applies a 13-step automatic optimisation pipeline: intent classification, model tier routing, context pruning, text deduplication, tool-result compression, image stripping, command-result caching, and knowledge-graph context injection. Measured 67% token reduction on a real 635-request session. Zero workflow changes required.',
@@ -3951,6 +3963,8 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
   },
 
   slmforge: {
+    site: 'https://slm-forge.onrender.com',
+    siteLabel: 'slm-forge.onrender.com',
     eyebrow: 'ML Platform - Edge AI - Local Fine-Tuning',
     title: 'SLM Forge',
     tagline: 'Local fine-tuning workbench for small language models (135M-7B parameters). Takes raw data, trains adapter-based fine-tunes on available hardware, quantizes, then exports to multiple edge formats in a single UI. One app replaces a typical multi-tool fine-tuning pipeline. Hardware-tier classification probes actual RAM/VRAM and refuses jobs that won\'t fit - no silent OOM.',
@@ -4028,6 +4042,8 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
   },
 
   safetyeye: {
+    site: 'https://safetyeye-frontend.onrender.com',
+    siteLabel: 'safetyeye-frontend.onrender.com',
     eyebrow: 'Computer Vision - Manufacturing Safety - Enterprise',
     title: 'SafetyEye',
     tagline: 'Enterprise real-time computer vision safety monitoring for 100+ concurrent camera feeds in heavy manufacturing. Edge GPU workers ingest streams, run object detection + tracking, evaluate configurable safety rules, extract evidence clips from a rolling buffer, route to an AI model for failure analysis, and publish to a compliance dashboard with automated regulatory form generation.',
@@ -4166,6 +4182,8 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
   },
 
   sovereigngrid: {
+    site: 'https://sovereigngrid.onrender.com',
+    siteLabel: 'sovereigngrid.onrender.com',
     eyebrow: 'Distributed Systems - Federated AI Compute - Web3 Auth',
     title: 'SovereignGrid',
     tagline: 'Decentralized P2P AI compute grid where developers pool local GPU hardware running open-source models into a single unified async API gateway. Consumer agents submit inference jobs; provider daemons connect their local engines via persistent WebSocket with Ethereum wallet authentication. Smart dispatch, multi-layer fault tolerance, and hourly credit settlement via PostgreSQL batch.',
@@ -4211,6 +4229,8 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
   },
 
   supplychain: {
+    site: 'https://supplychainintel.onrender.com',
+    siteLabel: 'supplychainintel.onrender.com',
     eyebrow: 'Supply Chain - Analytics Platform - Enterprise Operations',
     title: 'Supply Chain Intel',
     tagline: 'Supply chain intelligence platform ingesting from 8 enterprise data sources via a uniform connector interface. Computes daily KPIs (fill rate, on-time delivery, production attainment, freight exceptions) and weekly aggregates (inventory turns, forecast accuracy). Detects warranty claim anomalies via statistical analysis and forecasts demand 14 days forward.',
@@ -4261,6 +4281,8 @@ Middleware stack (auth, rate limit, idempotency, tenant scoping)
   },
 
   clawstreet: {
+    site: 'https://clawstreet.onrender.com',
+    siteLabel: 'clawstreet.onrender.com',
     eyebrow: 'Fintech - Agentic Trading - Claude Code',
     title: 'ClawStreet',
     tagline: 'An intraday mean-reversion trading setup for a cash brokerage account, driven entirely by Claude Code and a brokerage MCP server. There is no trading engine to compile - the strategy is a config file, a set of scheduled session prompts, and a cron runner. Claude reads the config, calls the broker tools, and logs every decision.',
@@ -4294,6 +4316,8 @@ cron -&gt; session runner script -&gt; headless Claude Code (claude -p)
   },
 
   waytale: {
+    site: 'https://waytale-iviq.onrender.com',
+    siteLabel: 'waytale-iviq.onrender.com',
     eyebrow: 'Mobile - AI Content Pipeline - Location-Aware',
     title: 'WayTale',
     tagline: 'A GPS-based landmark audio tour app that narrates the history, geography, and culture of landmarks as users travel. Built on a pre-generated content pipeline - public sources feed an LLM drafting pass, then TTS synthesis - so runtime narration is fast, sourced, and admin-reviewed before it ever reaches a phone.',
@@ -4329,6 +4353,8 @@ Public landmark/fact sources -&gt; LLM narration draft (facts-only, no invention
   },
 
   auric: {
+    site: 'https://auric-iai4.onrender.com',
+    siteLabel: 'auric-iai4.onrender.com',
     eyebrow: 'AI Platforms - Agent Platform + Multi-Provider Gateway',
     title: 'Auric',
     tagline: 'A self-hosted AI agent platform in a single Go binary - a token-optimization pipeline and a policy/audit governance layer, previously two separate systems, merged into one product. On top sit an autonomous agent loop with sandboxed tool execution and a multi-provider aggregation gateway that puts one API endpoint in front of several LLM providers with price/health routing, failover, and prepaid billing.',
@@ -4409,6 +4435,7 @@ function openCase(key) {
     <div class="cs-eyebrow">${cs.eyebrow}</div>
     <div class="cs-title">${cs.title}</div>
     <div class="cs-tagline">${cs.tagline}</div>
+    ${cs.site ? `<div style="margin:18px 0 4px"><a class="proj-site cs-site-btn" href="${cs.site}" target="_blank" rel="noopener">&#x2197; Visit ${cs.siteLabel}</a></div>` : ''}
     <div class="cs-meta-row">${cs.meta.map(m=>`<div class="cs-meta-item"><div class="cs-meta-label">${m.label}</div><div class="cs-meta-val">${m.val}</div></div>`).join('')}</div>
     <div class="cs-metrics">${cs.metrics.map(m=>`<div class="cs-metric-card"><div class="cs-metric-num">${m.num}</div><div class="cs-metric-lbl">${m.lbl}</div></div>`).join('')}</div>`;
 
@@ -4424,6 +4451,7 @@ function openCase(key) {
   html += `<div class="cs-tags">${cs.tags.map(t=>`<span class="cs-tag">${t}</span>`).join('')}</div>`;
   html += `<div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);display:flex;gap:14px;flex-wrap:wrap">
     <a href="mailto:raghu.s1211@gmail.com" class="btn-primary">📬 Discuss This Project</a>
+    ${cs.site ? `<a href="${cs.site}" target="_blank" rel="noopener" class="btn-secondary">&#x2197; Visit Live Site</a>` : ''}
     <button onclick="closeCase()" class="btn-secondary">← All Projects</button>
   </div>`;
 
