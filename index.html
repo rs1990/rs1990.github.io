@@ -29,8 +29,8 @@
   --rose: #F43F5E;
   --indigo: #818CF8;
   --text: #EEF0FF;
-  --text-muted: #7B85A8;
-  --text-dim: #3D4460;
+  --text-muted: #A9B2D0;
+  --text-dim: #8A93B8;
   --font-display: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Space Grotesk', sans-serif;
   --font-mono: 'Space Mono', monospace;
@@ -2068,7 +2068,7 @@ nav > .nav-links {
         <span class="tag">Python</span><span class="tag">Claude Code</span><span class="tag">MCP</span><span class="tag">Cron</span><span class="tag">Bollinger/RSI/ATR</span>
       </div>
       <div class="project-metric">Signal-validation phase by default - hard EOD flatten - tighten-only risk API - private repo</div>
-      <span class="project-link" style="opacity:0.5;cursor:default" onclick="event.stopPropagation()">&#x1F512; private repository</span>
+      <span class="project-link" style="opacity:0.8;cursor:default" onclick="event.stopPropagation()">&#x1F512; private repository</span>
       <div class="proj-actions"><div class="proj-cta">View Case Study &#x2192;</div><a class="proj-site" href="https://clawstreet.onrender.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="clawstreet.onrender.com">&#x2197; Visit Site</a></div>
     </div>
 
@@ -2106,7 +2106,7 @@ nav > .nav-links {
         <span class="tag">Go</span><span class="tag">Multi-Provider Gateway</span><span class="tag">Policy Engine</span><span class="tag">Audit Log</span><span class="tag">Prepaid Billing</span>
       </div>
       <div class="project-metric">49/49 tests passing - atomic billing, race-tested - deployed - private repo</div>
-      <span class="project-link" style="opacity:0.5;cursor:default" onclick="event.stopPropagation()">&#x1F512; private repository</span>
+      <span class="project-link" style="opacity:0.8;cursor:default" onclick="event.stopPropagation()">&#x1F512; private repository</span>
       <div class="proj-actions"><div class="proj-cta">View Case Study &#x2192;</div><a class="proj-site" href="https://auric-iai4.onrender.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="auric-iai4.onrender.com">&#x2197; Visit Site</a></div>
     </div>
 
@@ -2804,28 +2804,50 @@ function addTyping() {
   document.getElementById('chat-messages').appendChild(t);
   document.getElementById('chat-messages').scrollTop = 99999;
 }
+// The Anthropic API cannot be called from the browser - it needs a secret key and
+// does not send CORS headers. Requests go through the Cloudflare Worker in
+// chat-worker/, which holds the key and allow-lists this origin.
+const CHAT_ENDPOINT = 'https://portfolio-chat.CLOUDFLARE_SUBDOMAIN.workers.dev';
+
+const chatHistory = [];
+
 async function sendMessage(text) {
   if (!text.trim()) return;
   document.getElementById('chat-input').value = '';
   document.getElementById('chat-suggestions').style.display = 'none';
   addMsg(text, 'user');
+  chatHistory.push({role:'user', content:text});
   addTyping();
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch(CHAT_ENDPOINT, {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
-        model:'claude-sonnet-4-6', max_tokens:800,
+        max_tokens:800,
         system: PROFILE_CONTEXT,
-        messages:[{role:'user', content:text}]
+        messages: chatHistory
       })
     });
-    const data = await res.json();
+    const data = await res.json().catch(() => null);
     document.getElementById('typing-indicator')?.remove();
-    const reply = data.content?.[0]?.text || "I couldn't retrieve a response. Please try again!";
+    if (!res.ok) {
+      console.error('chat error', res.status, data);
+      addMsg("The assistant is unavailable right now. Email raghu.s1211@gmail.com and I'll get back to you.", 'bot');
+      chatHistory.pop();
+      return;
+    }
+    const reply = data?.content?.[0]?.text;
+    if (!reply) {
+      chatHistory.pop();
+      addMsg("I couldn't retrieve a response. Please try again!", 'bot');
+      return;
+    }
+    chatHistory.push({role:'assistant', content:reply});
     addMsg(reply, 'bot');
   } catch(e) {
+    console.error('chat network error', e);
     document.getElementById('typing-indicator')?.remove();
+    chatHistory.pop();
     addMsg("Connection issue - please try again in a moment.", 'bot');
   }
 }
