@@ -137,3 +137,46 @@ Design Decisions" list (or equivalent first-decisions-array section) as of 2026-
 owner request to fold in an honest "what's different / is it actually better" angle without
 adding new UI structure. Future syncs that add a new project card should add one of these too,
 and update existing ones if a project's honest competitive position changes materially.
+
+## 2026-08-04 (second pass) - content-only bullet/metrics pass over CASES
+
+**`content:` and `arch:` fields in CASES use backtick template literals, NOT single-quoted
+strings - apostrophes/contractions inside them need zero escaping** (unlike `decisions[].body`,
+which is single-quoted and DOES need `\'`). Confirmed by reading already-shipped text (e.g.
+"landmark's radius" in WayTale, "won\'t fit" in SLM Forge - the latter has a redundant-but-
+harmless escape). This means the apostrophe-escaping bug described above only applies to
+`decisions[].body` and `tagline`/`meta`/`tags` values (all single-quoted) - never to `content`
+or `arch` (backtick-delimited). Still ran `node --check` on both extracted `<script>` blocks
+(lines 9-14 and 2812-5911 as of this pass) as a final gate regardless.
+
+**Found and fixed a real stale-data bug via this pass, not via repo re-reading:** SLM Forge's
+model catalog count was internally inconsistent across the card - tagline said nothing, one
+metric tile said "30" models at "39M-7B" params, the What It Does prose said "27 edge-friendly
+models", and the Architecture section said "27 models" in one line but "30 curated models" in
+another. Cross-checked against `core/data/catalog.yaml` in the actual slm-forge repo (32 models,
+smallest `smollm2-135m`, largest `meta-llama-3-1-8b-instruct-4bit` = 8B) and corrected all four
+mentions to "32" / "135M-8B" consistently. **Lesson: even a pure content/copy pass should grep
+each card for internally-inconsistent numbers (same stat repeated with different values) before
+trusting metrics tiles at face value - the model catalog auto-refreshes weekly per
+`catalog.meta.json`, so this number will drift again; "32" is accurate as of 2026-08-04 but
+consider phrasing as "30+" in future syncs if exact-count edits become tedious.**
+
+**Found two more pre-existing vendor-name leaks the prior 2026-08-04 sync pass missed:**
+"OpenAI-compatible" / "OpenAI chat format" in SovereignGrid's and Auric's CASES prose (Architecture
+and What It Does sections) - not caught by the earlier grep battery that same day, meaning the
+vendor-name grep needs to be re-run fresh every pass, not trusted from an earlier pass's clean
+result. Fixed by replacing with generic "chat-completions-compatible" / "standard chat-completions
+format" wording. Left "Claude" / "Claude API" / "Claude Code" mentions alone throughout (Auric,
+ClawStreet, Intervue) - these are the owner's own tooling choice disclosed self-referentially and
+already used freely in tags (`tags:['...','Claude Code',...]`), an established exempt pattern, not
+a competitor-product leak.
+
+**Metric-tile corrections applied this pass (one per card, only where a real countable
+feature/module/endpoint count was missing from all 4 tiles):** SafetyEye (added "30+ backend API
+routers", verified via `grep -c 'APIRouter('` in the repo = 37, so "30+" is a safe accurate floor),
+ClawStreet (added "5 scheduled session types" - scan/check-in/flatten/analytics/smoketest, already
+named in the card's own Architecture section), WayTale (added "3 core backend endpoints" - already
+named in the card's own Architecture section). Most other cards (quant, aurum, optima, aetheros,
+sovereigngrid, supplychain, auric, intervue, sitaware) already had at least one genuine
+feature-count metric among their 4 tiles and needed no change - don't force a 5th tile or replace
+a tile that's already a good tie-in to a countable feature just to "add one" everywhere.
