@@ -5,10 +5,10 @@ metadata:
   type: project
 ---
 
-**As of 2026-07-20 the portfolio has 11 project cards, not 8.** Always verify the live
-count/list by grepping index.html for `project-title` or `CAR_KEYS` rather than assuming
-a fixed number - it has grown twice now (8 -> 9 with AetherOS -> 11 with SovereignGrid +
-ClawStreet + WayTale) without memory being updated at the time.
+**As of 2026-07-20 (later pass) the portfolio has 13 project cards, not 8 or 11.** Always verify
+the live count/list by grepping index.html for `project-title` or `CAR_KEYS` rather than assuming
+a fixed number - it has grown three times now (8 -> 9 with AetherOS -> 11 with SovereignGrid +
+ClawStreet + WayTale -> 13 with Auric + Intervue) without memory being updated at the time.
 
 | Portfolio Card (CASES key) | Local Directory | GitHub URL |
 |---|---|---|
@@ -23,19 +23,21 @@ ClawStreet + WayTale) without memory being updated at the time.
 | SovereignGrid (`sovereigngrid`) | /Users/maverick/Desktop/Claude dev/SovereignGrid | no local .git (no remote) |
 | ClawStreet (`clawstreet`) | /Users/maverick/Desktop/Claude dev/clawstreet | https://github.com/rs1990/clawstreet |
 | WayTale (`waytale`) | /Users/maverick/Desktop/Claude dev/WayTale | https://github.com/rs1990/waytale |
+| Auric (`auric`) | /Users/maverick/Desktop/Claude dev/Auric | https://github.com/rs1990/auric (private) |
+| Intervue (`intervue`) | /Users/maverick/Desktop/Claude dev/loopdecipher | https://github.com/rs1990/intervue (public, created 2026-07-20) |
 
 **Why:** The bloomberg-terminal -> quanttradeai mapping is the trickiest non-obvious one.
 The local directory is named bloomberg-terminal but the GitHub repo is rs1990/quanttradeai.
-Also AetherOS and SovereignGrid have no `.git` folder locally at all (present via download/copy,
-not clone) - `git log` on them always fails, that's expected, not an error.
+Similarly, the local directory is `loopdecipher` but the portfolio card/CASES key/GitHub repo are
+all `intervue` (project renamed 2026-07-17; GitHub repo `rs1990/intervue` created 2026-07-20 - the
+local clone's `origin` remote is still misconfigured, pointing at `rs1990/aetheros.git`, so don't
+trust `git remote -v` there for the public URL). AetherOS and SovereignGrid have no `.git` folder
+locally at all (present via download/copy, not clone) - `git log` on them always fails, expected.
 
 **How to apply:** When checking git log or reading files for QuantTradeAI, look in bloomberg-terminal.
 When reading GitHub API for QuantTradeAI, use rs1990/quanttradeai. For AetherOS/SovereignGrid, use
-`find -newer <ref>` against the last-sync date instead of `git log` to detect changes.
-
-**Candidate repos reviewed, NOT yet in index.html (as of 2026-07-20 sync, presented to owner for decision):**
-- /Users/maverick/Desktop/Claude dev/Auric - https://github.com/rs1990/auric - single-Go-binary merge of AurumAI (governance) + OptimaLLM (optimization) into one agent platform + multi-provider gateway. Real, tested, honestly self-documented. Recommended: worth adding.
-- /Users/maverick/Desktop/Claude dev/loopdecipher ("Intervue") - git remote misconfigured, points at rs1990/aetheros.git (stale/wrong, same pattern as [[sync_patterns]] gotcha #5). Job-posting-to-interview-study-guide app. Real full-stack code, no tests, Vercel deploy button still has placeholder username (likely not live). Recommended: worth adding once deployment confirmed.
+`find -newer <ref>` against the last-sync date instead of `git log` to detect changes. For Intervue,
+read source in loopdecipher/ but always link/label it as Intervue + rs1990/intervue.
 
 **Reviewed, NOT recommended for #projects (as of 2026-07-20):**
 - /Users/maverick/Desktop/Claude dev/SakhiVerify - no source code, only architecture diagrams + a "Geneva Challenge 2026" competition docx. Concept/pitch doc, not a coded project. Could fit the Systems Thinking diagram carousel instead.

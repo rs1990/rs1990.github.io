@@ -22,4 +22,6 @@ Rules that apply on every sync of the portfolio site (index.html):
 - grep for em dashes (should be 0)
 - grep for "Embedded C/C++" (should be 0)
 - Verify Konami/hidden features still present (grep for "konami" should return 8+ hits)
-- Verify "Current Status" count = 8 (one per project)
+- Verify `grep -c "'Current Status'" index.html` equals `grep -c 'project-title">' index.html`
+  (one Current Status section per project card - count grows over time, don't hardcode it; see
+  [[project_repo_mapping]] for the current live count).
