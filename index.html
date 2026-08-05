@@ -1267,6 +1267,16 @@ nav > .nav-links {
   }
 }
 
+/* Wide desktop: let the projects grid use the screen instead of capping at 1200px like other sections */
+@media (min-width: 1440px) {
+  #projects {
+    max-width: 1800px;
+  }
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
 /* ── SKILLS ── */
 @media (min-width: 1024px) {
   .skills-matrix {
